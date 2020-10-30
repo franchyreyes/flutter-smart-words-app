@@ -1,26 +1,35 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:findwords/db/category_dao.dart';
+import 'package:findwords/db/language_dao.dart';
+import 'package:findwords/db/quiz_dao.dart';
 import 'package:findwords/model/category.dart';
 import 'package:findwords/model/language.dart';
+import 'package:findwords/model/quiz.dart';
 import 'package:findwords/repositories/cloud_repository_interface.dart';
 
 class CloudFireStore implements ICloudRepository {
   CategoryDAO categoryDAO = CategoryDAO();
+  QuizDAO quizDAO = QuizDAO();
+  LanguageDAO languageDAO = LanguageDAO();
+
   List<Category> categoryList;
+  List<Quiz> quizList;
+  List<Language> languageList;
 
   @override
   void loadData() {
     //getAllLanguage();
-     convertFutureToList();
-    if(categoryList == null){
+    convertFutureToList();
+    if (quizList == null) {
       print("Is laoding");
     }
-    //categoryDAO.batchPut(categoryList);
-    categoryDAO.getByKey(1,Category());
+    quizDAO.batchPut(quizList);
+   //quizDAO.getByKey(1,Quiz());
+   // //getAllQuiz();
   }
 
   void convertFutureToList() async {
-    categoryList = await getAllCategory();
+    quizList = await getAllQuiz();
   }
 
   Future<List<Language>> getAllLanguage() async {
@@ -49,5 +58,18 @@ class CloudFireStore implements ICloudRepository {
       });
     });
     return categoryList;
+  }
+
+  Future<List<Quiz>> getAllQuiz() async {
+    List<Quiz> quizList = [];
+    await FirebaseFirestore.instance
+        .collection("quiz")
+        .doc('7Gax3pSD2s2WtSihDZX5')
+        .get()
+        .then((querySnapshot) {
+        quizList.add(Quiz.fromDocumentWithID(querySnapshot.data(), querySnapshot.id));
+    });
+
+    return quizList;
   }
 }

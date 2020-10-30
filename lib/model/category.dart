@@ -41,7 +41,7 @@ class Category extends GenericEntity{
      return category;
    }
 
-   factory Category.fromMap(Map<String, Object> doc,) {
+   factory Category.fromMap(Map<String, Object> doc) {
      Category category = new Category(
        documentID: doc['documentID'],
        name: doc['name'],

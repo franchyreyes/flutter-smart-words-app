@@ -5,10 +5,9 @@ import 'package:sembast/sembast.dart';
 abstract class GenericRepository<T extends GenericEntity> {
   Future<Database> get _db async => await SemBastDatabase.instance.database;
 
-  StoreRef<int, Map<String,dynamic>> store;
+  StoreRef<int, Map<String, dynamic>> store;
 
-
-  Future put(T entity) async{
+  Future put(T entity) async {
     return await store.add(await _db, (entity).toMap());
   }
 
@@ -17,6 +16,9 @@ abstract class GenericRepository<T extends GenericEntity> {
     final storeValues = await store.find(await _db);
     if (storeValues.isEmpty) {
       entities.forEach((entity) async {
+        print("hola");
+       // debug(entity.toMap());
+
         await store.add(await _db, entity.toMap());
       });
     }
@@ -26,29 +28,27 @@ abstract class GenericRepository<T extends GenericEntity> {
     final recordSnapshot = await store.find(await _db);
     if (recordSnapshot.isNotEmpty) {
       return recordSnapshot.map((snapshot) {
-        return entity.fromMapGeneric(snapshot.value,snapshot.key);
+        return entity.fromMapGeneric(snapshot.value, snapshot.key);
       }).toList();
     }
     return null;
   }
 
-  Future<T> getByKey(int key,T entity) async {
+  Future<T> getByKey(int key, T entity) async {
     final finder = Finder(filter: Filter.byKey(key));
 
     var record = await store.findFirst(await _db, finder: finder);
     if (record == null) return null;
     print(record.value);
-    return entity.fromMapGeneric(record.value,record.key);
+    return entity.fromMapGeneric(record.value, record.key);
   }
 
   Future<T> findByDocument(String document, T entity) async {
-    final finder = Finder(
-        filter: Filter.equals('documentID', document)
-    );
+    final finder = Finder(filter: Filter.equals('documentID', document));
     var record = await store.findFirst(await _db, finder: finder);
     if (record == null) return null;
 
-    return entity.fromMapGeneric(record.value,record.key);
+    return entity.fromMapGeneric(record.value, record.key);
   }
 
   Future delete(T entity) async {
@@ -69,26 +69,4 @@ abstract class GenericRepository<T extends GenericEntity> {
       finder: finder,
     );
   }
-
-
-  /*Future<T> getByDocument(String id);
-  Future<T> getByKey(int key);
-  Future batchPut(List<T> entities);
-  */
 }
-
-/*
-*
-* abstract class Repository<T> {
-  Future put(T entity);
-  Future<T> get(id);
-  Future<T> findOne(Filter<T> filter);
-  Stream<T> find(Filter<T> filter);
-  Future<int> count([Filter<T> filter]);
-  Future batchPut(Set<T> entities);
-  Stream<T> batchGet(Set ids);
-}
-*
-*
-*
-*  */

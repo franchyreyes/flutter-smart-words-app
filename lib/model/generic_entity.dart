@@ -10,7 +10,7 @@ class GenericEntity {
     };
   }
 
-  Object fromMapGeneric (Map<String, Object> doc, int id) {
+  Object fromMapGeneric (Map<String, dynamic> doc, int id) {
     return null;
   }
 }
