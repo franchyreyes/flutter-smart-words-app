@@ -6,36 +6,39 @@ import 'package:findwords/model/category.dart';
 import 'package:findwords/model/language.dart';
 import 'package:findwords/model/quiz.dart';
 import 'package:findwords/repositories/cloud_repository_interface.dart';
+import 'package:findwords/utils/constant.dart';
 
 class CloudFireStore implements ICloudRepository {
   CategoryDAO categoryDAO = CategoryDAO();
-  QuizDAO quizDAO = QuizDAO();
   LanguageDAO languageDAO = LanguageDAO();
+  QuizDAO quizDAO = QuizDAO();
 
   List<Category> categoryList;
-  List<Quiz> quizList;
   List<Language> languageList;
+  List<Quiz> quizList;
 
   @override
   void loadData() {
-    //getAllLanguage();
     convertFutureToList();
-    if (quizList == null) {
-      print("Is laoding");
+    if ((categoryList != null) &&
+        (languageList != null) &&
+        (quizList != null)) {
+      categoryDAO.batchPut(categoryList);
+      languageDAO.batchPut(languageList);
+      quizDAO.batchPut(quizList);
     }
-    quizDAO.batchPut(quizList);
-   //quizDAO.getByKey(1,Quiz());
-   // //getAllQuiz();
   }
 
   void convertFutureToList() async {
+    categoryList = await getAllCategory();
+    languageList = await getAllLanguage();
     quizList = await getAllQuiz();
   }
 
   Future<List<Language>> getAllLanguage() async {
     List<Language> languageList = [];
     await FirebaseFirestore.instance
-        .collection("language")
+        .collection(kTableLanguageName)
         .get()
         .then((querySnapshot) {
       querySnapshot.docs.forEach((document) {
@@ -49,7 +52,7 @@ class CloudFireStore implements ICloudRepository {
   Future<List<Category>> getAllCategory() async {
     List<Category> categoryList = [];
     await FirebaseFirestore.instance
-        .collection("category")
+        .collection(kTableCategoryName)
         .get()
         .then((querySnapshot) {
       querySnapshot.docs.forEach((document) {
@@ -63,11 +66,12 @@ class CloudFireStore implements ICloudRepository {
   Future<List<Quiz>> getAllQuiz() async {
     List<Quiz> quizList = [];
     await FirebaseFirestore.instance
-        .collection("quiz")
+        .collection(kTableQuizName)
         .doc('7Gax3pSD2s2WtSihDZX5')
         .get()
         .then((querySnapshot) {
-        quizList.add(Quiz.fromDocumentWithID(querySnapshot.data(), querySnapshot.id));
+      quizList
+          .add(Quiz.fromDocumentWithID(querySnapshot.data(), querySnapshot.id));
     });
 
     return quizList;

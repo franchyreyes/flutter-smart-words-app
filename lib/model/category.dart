@@ -1,4 +1,6 @@
 import 'package:findwords/model/generic_entity.dart';
+import 'package:flutter/material.dart';
+
 
 class Category extends GenericEntity{
    final String documentID;

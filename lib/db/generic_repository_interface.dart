@@ -8,6 +8,7 @@ abstract class GenericRepository<T extends GenericEntity> {
   StoreRef<int, Map<String, dynamic>> store;
 
   Future put(T entity) async {
+    //await store.drop(await _db);
     return await store.add(await _db, (entity).toMap());
   }
 
@@ -16,18 +17,17 @@ abstract class GenericRepository<T extends GenericEntity> {
     final storeValues = await store.find(await _db);
     if (storeValues.isEmpty) {
       entities.forEach((entity) async {
-        print("hola");
-       // debug(entity.toMap());
-
         await store.add(await _db, entity.toMap());
       });
     }
   }
 
   Future<List<T>> getAll(T entity) async {
+
     final recordSnapshot = await store.find(await _db);
+
     if (recordSnapshot.isNotEmpty) {
-      return recordSnapshot.map((snapshot) {
+      return recordSnapshot.map<T>((snapshot) {
         return entity.fromMapGeneric(snapshot.value, snapshot.key);
       }).toList();
     }
@@ -39,7 +39,6 @@ abstract class GenericRepository<T extends GenericEntity> {
 
     var record = await store.findFirst(await _db, finder: finder);
     if (record == null) return null;
-    print(record.value);
     return entity.fromMapGeneric(record.value, record.key);
   }
 
