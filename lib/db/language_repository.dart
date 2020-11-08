@@ -3,4 +3,5 @@ import 'package:findwords/model/language.dart';
 
 abstract class LanguageRepository extends GenericRepository<Language>{
 
+  Future<Language> getAppLanguage(String languageCode);
 }

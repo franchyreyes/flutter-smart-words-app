@@ -3,6 +3,9 @@ import 'package:findwords/db/category_dao.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+
+import 'locale/locales.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -13,14 +16,22 @@ void main() async {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // Wrapping the whole app with BlocProvider to get access to FruitBloc everywhere
-    // BlocProvider extends InheritedWidget.
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.yellow,
         accentColor: Colors.redAccent,
       ),
+      debugShowCheckedModeBanner: false,
+      supportedLocales: [
+        const Locale('en',''),
+        const Locale('es',''),
+      ],
+      localizationsDelegates: [
+        const AppLocalizationsDelegate(),
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ],
       home: BlocProvider(
           create: (BuildContext context) => CategoryCubit(),
           child: HomePage()),
@@ -61,6 +72,7 @@ class _HomePageState extends State<HomePage> {
 
   Widget _buildBody() {
     return BlocBuilder<CategoryCubit, CategoryState>(builder: (context, state) {
+      Locale myLocale = Localizations.localeOf(context);
       if (state is CategoriesLoadingState) {
         return CircularProgressIndicator();
       } else if (state is CategoriesLoadedState) {
@@ -75,7 +87,7 @@ class _HomePageState extends State<HomePage> {
           },
         );
       } else {
-        return Text('Loading');
+        return Text(myLocale.languageCode);
       }
     });
   }
