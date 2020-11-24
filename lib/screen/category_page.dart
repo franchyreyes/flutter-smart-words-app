@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:findwords/components/category_component.dart';
 import 'package:findwords/components/curvenavigationbar_component.dart';
+import 'package:findwords/screen/setting_page.dart';
 import 'package:findwords/utils/colors.dart';
 import 'package:findwords/utils/constant.dart';
 import 'package:findwords/utils/size_helper.dart';
@@ -100,6 +101,7 @@ class _CategoryPageState extends State<CategoryPage> {
         height: 100,
         color: t3_app_background,
         child: CurvedNavigationBar(
+          animationDuration: Duration.zero,
           backgroundColor: t3_colorPrimaryDark,
           color: t3_app_background,
 
@@ -118,6 +120,9 @@ class _CategoryPageState extends State<CategoryPage> {
           ],
           onTap: (index) {
             //Handle button tap
+            if(index == 1){
+              Navigator.pushReplacementNamed(context, SettingPage.id);
+            }
           },
         ),
       ),

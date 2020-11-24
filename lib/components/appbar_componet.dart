@@ -1,5 +1,6 @@
 import 'package:findwords/utils/colors.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+
 
 class AppbarComponent extends StatelessWidget {
   @override
@@ -10,6 +11,7 @@ class AppbarComponent extends StatelessWidget {
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
             colors: <Color>[t3_colorPrimary, t3_colorPrimaryDark]),
+
       ),
     );
   }

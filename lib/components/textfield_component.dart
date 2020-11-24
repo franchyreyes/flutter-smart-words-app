@@ -17,6 +17,7 @@ class TextFieldComponentState extends State<TextFieldComponent> {
   Widget build(BuildContext context) {
     return Container(
       width: displayWidth(context) * 0.80,
+      padding: EdgeInsets.only(top: 20),
       decoration:
           boxDecoration(radius: 40, showShadow: true, bgColor: t3_white),
       child: TextFormField(
@@ -31,12 +32,12 @@ class TextFieldComponentState extends State<TextFieldComponent> {
           filled: true,
           fillColor: t3_white,
           enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(40),
-            borderSide: const BorderSide(color: Colors.grey, width: 0.0),
+            borderRadius: BorderRadius.circular(18),
+            borderSide: const BorderSide(color: Colors.grey, width: 1.0),
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(40),
-            borderSide: const BorderSide(color: Colors.grey, width: 0.0),
+            borderSide: const BorderSide(color: t3_colorPrimaryDark, width: 1.0),
           ),
         ),
       ),

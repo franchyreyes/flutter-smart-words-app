@@ -3,6 +3,7 @@ import 'package:findwords/screen/HomePage.dart';
 import 'package:findwords/screen/category_page.dart';
 import 'package:findwords/screen/question_page.dart';
 import 'package:findwords/screen/setting_page.dart';
+import 'package:findwords/screen/splash_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -33,7 +34,7 @@ class MyApp extends StatelessWidget {
         ],
         home: BlocProvider(
           create: (BuildContext context) => CategoryCubit(),
-          child: CategoryPage(),
+          child: SplashPage(),
         ),
         routes: {
           HomePage.id: (context) => HomePage(),

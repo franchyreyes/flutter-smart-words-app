@@ -1,4 +1,7 @@
 import 'package:findwords/components/appbar_componet.dart';
+import 'package:findwords/components/curvenavigationbar_component.dart';
+import 'package:findwords/screen/HomePage.dart';
+import 'package:findwords/screen/category_page.dart';
 import 'package:findwords/utils/colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -72,6 +75,38 @@ class _SettingPageState extends State<SettingPage> {
           ],
         ),
       ),
+      bottomNavigationBar:
+      Container(
+        height: 100,
+        color: t3_app_background,
+        child: CurvedNavigationBar(
+          animationDuration: Duration.zero,
+          backgroundColor: t3_colorPrimaryDark,
+          color: t3_app_background,
+          initialIndex: 1,
+          items: <Widget>[
+            Icon(
+              Icons.settings_applications,
+              color: t3_icon_color,
+              size: 30.0,
+            ),
+
+            Icon(
+              Icons.settings_applications,
+              color: t3_icon_color,
+              size: 30.0,
+            )
+
+          ],
+          onTap: (index) {
+            //Handle button tap
+            if(index == 0){
+              Navigator.pushReplacementNamed(context, CategoryPage.id);
+            }
+          },
+        ),
+      ),
+
     );
   }
 }

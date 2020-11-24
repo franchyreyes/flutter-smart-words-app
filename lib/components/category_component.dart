@@ -1,3 +1,4 @@
+import 'package:findwords/screen/question_page.dart';
 import 'package:findwords/utils/colors.dart';
 import 'package:findwords/utils/constant.dart';
 import 'package:findwords/utils/size_helper.dart';
@@ -14,29 +15,34 @@ class CategoryComponent extends StatelessWidget {
   Widget build(BuildContext context) {
     return Wrap(
       children: <Widget>[
-        Container(
-          width: displaySize(context).width,
-          alignment: Alignment.center,
-          margin: EdgeInsets.only(left: 16, right: 16),
-          child: Column(
-            children: <Widget>[
-              Container(
-                decoration: boxDecoration(bgColor: t3_white, radius: 12,showShadow: true),
-                child: Padding(
-                  padding: EdgeInsets.all(12.0),
-                  child: Image(
-                    image: AssetImage('images/lightbulb.png'),
-                    height: 70,
-                    width: MediaQuery.of(context).size.width,
+        GestureDetector(
+          onTap: (){
+            Navigator.pushNamed(context, QuestionPage.id);
+          },
+          child: Container(
+            width: displaySize(context).width,
+            alignment: Alignment.center,
+            margin: EdgeInsets.only(left: 16, right: 16),
+            child: Column(
+              children: <Widget>[
+                Container(
+                  decoration: boxDecoration(bgColor: t3_white, radius: 12,showShadow: true),
+                  child: Padding(
+                    padding: EdgeInsets.all(12.0),
+                    child: Image(
+                      image: AssetImage('images/lightbulb.png'),
+                      height: 70,
+                      width: MediaQuery.of(context).size.width,
+                    ),
                   ),
                 ),
-              ),
-              SizedBox(height: 4),
-              Container(
-                margin: EdgeInsets.only(bottom: 16),
-                child: text(model.name, textColor: t3_colorPrimary),
-              ),
-            ],
+                SizedBox(height: 4),
+                Container(
+                  margin: EdgeInsets.only(bottom: 16),
+                  child: text(model.name, textColor: t3_colorPrimary),
+                ),
+              ],
+            ),
           ),
         ),
       ],
