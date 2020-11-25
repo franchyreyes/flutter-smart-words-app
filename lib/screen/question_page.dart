@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:findwords/components/appbar_componet.dart';
 import 'package:findwords/components/textfield_component.dart';
 import 'package:findwords/utils/colors.dart';
@@ -18,6 +19,30 @@ class QuestionPage extends StatefulWidget {
 }
 
 class _QuestionPageState extends State<QuestionPage> {
+  final assetsAudioPlayer = AssetsAudioPlayer();
+
+  @override
+  void initState() {
+    super.initState();
+    assetsAudioPlayer.open(
+      Audio("images/fw.mp3"),
+    );
+    assetsAudioPlayer.playlistFinished.listen((finished) {
+      if (finished) {
+         if(assetsAudioPlayer.isPlaying.value) {
+           assetsAudioPlayer.open(
+             Audio("images/fw.mp3"),
+           );
+         }
+      }
+    });
+  }
+
+  void dispose() {
+    super.dispose();
+    assetsAudioPlayer.dispose();
+  }
+
   RandomColor _randomColor = RandomColor();
   List<Icon> iconList = [
     Icon(
@@ -50,13 +75,12 @@ class _QuestionPageState extends State<QuestionPage> {
       body: Column(
         children: <Widget>[
           Expanded(
-            flex: 1 ,
+            flex: 1,
             child: ClipPath(
               clipper: WaveClipperTwo(flip: true),
               child: Container(
-
                   decoration: BoxDecoration(
-                    border: Border.all(color: t3_white,width: 1.0),
+                    border: Border.all(color: t3_white, width: 1.0),
                     gradient: LinearGradient(
                         colors: <Color>[t3_colorPrimary, t3_colorPrimaryDark]),
                     borderRadius: BorderRadius.all(Radius.circular(0.0)),
@@ -131,7 +155,6 @@ class _QuestionPageState extends State<QuestionPage> {
                         Image(
                           image: AssetImage('images/pencil.png'),
                           width: displayWidth(context) * 0.12,
-
                         ),
                         TextFieldComponent(),
                       ],
@@ -144,7 +167,7 @@ class _QuestionPageState extends State<QuestionPage> {
                       color: Colors.grey,
                     ),
                     SizedBox(
-                      height:20,
+                      height: 20,
                     ),
                     Text(
                       "Idea or Help",
