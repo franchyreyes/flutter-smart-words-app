@@ -1,26 +1,116 @@
 {"@@locale": "en",
   "@@last_modified": "2019-04-23T10:24:02.829974",
-  "title": "Movies",
-  "@title": {
-    "description": "Title for the Demo application",
+  "questionSubTitle": "Find the words",
+  "@questionSubTitle": {
+    "description": "questionSubTitle for the Demo application",
     "type": "text",
     "placeholders": {}
   },
-  "titleLabel": "title",
-  "@titleLabel": {
-    "description": "titleLabel for the Demo application",
+  "categoryTistle": "Category",
+  "@categoryTitle": {
+    "description": "categoryTitle for the Demo application",
     "type": "text",
     "placeholders": {}
   },
-  "descriptionLabel": "description",
-  "@descriptionLabel": {
-    "description": "descriptionLabel for the Demo application",
+  "questionField": "Write the letters here",
+  "@questionField": {
+    "description": "questionField for the Demo application",
     "type": "text",
     "placeholders": {}
   },
-  "add": "Add new Movies",
-  "@add": {
-    "description": "add for the Demo application",
+  "questionHelp": "Idea or Help",
+  "@questionHelp": {
+    "description": "questionHelp for the Demo application",
+    "type": "text",
+    "placeholders": {}
+  },
+  "questionIntent": "You got 3 intent",
+  "@questionIntent": {
+    "description": "questionIntent for the Demo application",
+    "type": "text",
+    "placeholders": {}
+  },
+  "welcome": "Welcome",
+  "@welcome": {
+    "description": "welcome for the Demo application",
+    "type": "text",
+    "placeholders": {}
+  },
+  "fruit": "Fruits",
+  "@fruit": {
+    "description": "fruit for the Demo application",
+    "type": "text",
+    "placeholders": {}
+  },
+  "sport": "Sports",
+  "@sport": {
+    "description": "sport for the Demo application",
+    "type": "text",
+    "placeholders": {}
+  },
+  "things": "Things",
+  "@things": {
+    "description": "things for the Demo application",
+    "type": "text",
+    "placeholders": {}
+  },
+  "all": "Combination",
+  "@all": {
+    "description": "all for the Demo application",
+    "type": "text",
+    "placeholders": {}
+  },
+  "animal": "Animals",
+  "@animal": {
+    "description": "animal for the Demo application",
+    "type": "text",
+    "placeholders": {}
+  },
+  "body": "Bodies",
+  "@body": {
+    "description": "body for the Demo application",
+    "type": "text",
+    "placeholders": {}
+  },
+  "categorySelect": "Select the category",
+  "@categorySelect": {
+    "description": "categorySelect for the Demo application",
+    "type": "text",
+    "placeholders": {}
+  },
+  "home": "Home",
+  "@home": {
+    "description": "home for the Demo application",
+    "type": "text",
+    "placeholders": {}
+  },
+  "setting": "Settings",
+  "@setting": {
+    "description": "setting for the Demo application",
+    "type": "text",
+    "placeholders": {}
+  },
+  "difficulty": "Difficulties",
+  "@difficulty": {
+    "description": "difficulty for the Demo application",
+    "type": "text",
+    "placeholders": {}
+  },
+  "easy": "Easy",
+  "@easy": {
+    "description": "easy for the Demo application",
+    "type": "text",
+    "placeholders": {}
+  },
+  "medium": "Medium",
+  "@medium": {
+    "description": "medium for the Demo application",
+    "type": "text",
+    "placeholders": {}
+  },
+  "hard": "Hard",
+  "@hard": {
+    "description": "hard for the Demo application",
     "type": "text",
     "placeholders": {}
   }

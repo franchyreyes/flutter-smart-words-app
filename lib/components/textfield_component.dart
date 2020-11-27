@@ -2,6 +2,7 @@
 
 
 
+import 'package:findwords/locale/locales.dart';
 import 'package:findwords/utils/colors.dart';
 import 'package:findwords/utils/constant.dart';
 import 'package:findwords/utils/size_helper.dart';
@@ -28,7 +29,7 @@ class TextFieldComponentState extends State<TextFieldComponent> {
 
           //contentPadding: EdgeInsets.fromLTRB(10, 10, 10, 10),
           contentPadding: new EdgeInsets.symmetric(vertical: -15.0, horizontal: 10.0),
-          hintText: "Write the letters here",
+          hintText: AppLocalizations.of(context).questionField(),
           filled: true,
           fillColor: t3_white,
           enabledBorder: OutlineInputBorder(

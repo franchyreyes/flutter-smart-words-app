@@ -1,26 +1,116 @@
 {"@@locale": "es",
   "@@last_modified": "2019-04-23T10:24:02.829974",
-  "title": "Peliculas",
-  "@title": {
-    "description": "Title for the Demo application",
+  "questionSubTitle": "Encuentra la palabra",
+  "@questionSubTitle": {
+    "description": "questionSubTitle for the Demo application",
     "type": "text",
     "placeholders": {}
   },
-  "titleLabel": "Titulo",
-  "@titleLabel": {
-    "description": "titleLabel for the Demo application",
+  "categoryTitle": "Categoria",
+  "@categoryTitle": {
+    "description": "categoryTitle for the Demo application",
     "type": "text",
     "placeholders": {}
   },
-  "descriptionLabel": "descripcion",
-  "@descriptionLabel": {
-    "description": "descriptionLabel for the Demo application",
+  "questionField": "Escribe las letras aqui",
+  "@questionField": {
+    "description": "questionField for the Demo application",
     "type": "text",
     "placeholders": {}
   },
-  "add": "Agregar nueva pelicula",
-  "@add": {
-    "description": "add for the Demo application",
+  "questionHelp": "Ayuda",
+  "@questionHelp": {
+    "description": "questionHelp for the Demo application",
+    "type": "text",
+    "placeholders": {}
+  },
+  "questionIntent": "Tu tienes 3 intentos",
+  "@questionIntent": {
+    "description": "questionIntent for the Demo application",
+    "type": "text",
+    "placeholders": {}
+  },
+  "welcome": "Bienvenidos",
+  "@welcome": {
+    "description": "welcome for the Demo application",
+    "type": "text",
+    "placeholders": {}
+  },
+  "fruit": "Fruitas",
+  "@fruit": {
+    "description": "fruit for the Demo application",
+    "type": "text",
+    "placeholders": {}
+  },
+  "sport": "Deportes",
+  "@sport": {
+    "description": "sport for the Demo application",
+    "type": "text",
+    "placeholders": {}
+  },
+  "things": "Cosas",
+  "@things": {
+    "description": "things for the Demo application",
+    "type": "text",
+    "placeholders": {}
+  },
+  "all": "Todo",
+  "@all": {
+    "description": "all for the Demo application",
+    "type": "text",
+    "placeholders": {}
+  },
+  "animal": "Animales",
+  "@animal": {
+    "description": "animal for the Demo application",
+    "type": "text",
+    "placeholders": {}
+  },
+  "body": "Cuerpo Humano",
+  "@body": {
+    "description": "body for the Demo application",
+    "type": "text",
+    "placeholders": {}
+  },
+  "categorySelect": "Selecciona la categoria",
+  "@categorySelect": {
+    "description": "categorySelect for the Demo application",
+    "type": "text",
+    "placeholders": {}
+  },
+  "home": "Casa",
+  "@home": {
+    "description": "home for the Demo application",
+    "type": "text",
+    "placeholders": {}
+  },
+  "setting": "Configuracion",
+  "@setting": {
+    "description": "setting for the Demo application",
+    "type": "text",
+    "placeholders": {}
+  },
+  "difficulty": "Difilcutades",
+  "@difficulty": {
+    "description": "difficulty for the Demo application",
+    "type": "text",
+    "placeholders": {}
+  },
+  "easy": "Facil",
+  "@easy": {
+    "description": "easy for the Demo application",
+    "type": "text",
+    "placeholders": {}
+  },
+  "medium": "Normal",
+  "@medium": {
+    "description": "medium for the Demo application",
+    "type": "text",
+    "placeholders": {}
+  },
+  "hard": "Complicado",
+  "@hard": {
+    "description": "hard for the Demo application",
     "type": "text",
     "placeholders": {}
   }

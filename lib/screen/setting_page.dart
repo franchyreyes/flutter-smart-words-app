@@ -1,5 +1,6 @@
 import 'package:findwords/components/appbar_componet.dart';
 import 'package:findwords/components/curvenavigationbar_component.dart';
+import 'package:findwords/locale/locales.dart';
 import 'package:findwords/screen/HomePage.dart';
 import 'package:findwords/screen/category_page.dart';
 import 'package:findwords/utils/colors.dart';
@@ -14,12 +15,32 @@ class SettingPage extends StatefulWidget {
 }
 
 class _SettingPageState extends State<SettingPage> {
+
+  List<DataModel> dataList = [
+    DataModel(
+      images: Icons.person,
+      name: 'Easy',
+    ),
+    DataModel(
+      images: Icons.person,
+      name: 'Medium',
+    ),
+    DataModel(
+      images: Icons.person,
+      name: 'Hard',
+    ),
+  ];
+
   @override
   Widget build(BuildContext context) {
+    dataList[0].name  = AppLocalizations.of(context).easy();
+    dataList[1].name  = AppLocalizations.of(context).medium();
+    dataList[2].name  = AppLocalizations.of(context).hard();
+
     return Scaffold(
         backgroundColor: t3_app_background,
       appBar: AppBar(
-        title: Text("Settings"),
+        title: Text(AppLocalizations.of(context).setting()),
         flexibleSpace: AppbarComponent(),
       ),
       body: SafeArea(
@@ -32,7 +53,7 @@ class _SettingPageState extends State<SettingPage> {
                 Padding(
                   padding: EdgeInsets.only(left: 20.0),
                     child: Text(
-                      "Difficulty: ",
+                      AppLocalizations.of(context).difficulty(),
                       style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     ),
                   ),
@@ -121,17 +142,3 @@ class DataModel {
   });
 }
 
-List<DataModel> dataList = [
-  DataModel(
-    images: Icons.person,
-    name: 'Easy',
-  ),
-  DataModel(
-    images: Icons.person,
-    name: 'Medium',
-  ),
-  DataModel(
-    images: Icons.person,
-    name: 'Hard',
-  ),
-];

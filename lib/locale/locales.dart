@@ -22,37 +22,171 @@ class AppLocalizations {
     return Localizations.of<AppLocalizations>(context, AppLocalizations);
   }
 
-  String title() {
+  /* Begin  Question Page*/
+  String categoryTitle() {
     return Intl.message(
-      'Movies',
-      name: 'title',
-      desc: 'Title for the Demo application',
+      'Category',
+      name: 'categoryTitle',
+      desc: 'categoryTitle of the application',
     );
   }
 
-  String titleLabel() {
+  String questionSubTitle() {
     return Intl.message(
-      'title',
-      name: 'titleLabel',
-      desc: 'titleLabel for the Demo application',
+      'Find the words',
+      name: 'questionSubTitle',
+      desc: 'questionSubTitle of the application',
     );
   }
 
-  String descriptionLabel() {
+  String questionField() {
     return Intl.message(
-      'description',
-      name: 'descriptionLabel',
-      desc: 'descriptionLabel for the Demo application',
-    );
-  }
-  String add() {
-    return Intl.message(
-      'Add new Movies',
-      name: 'add',
-      desc: 'add for the Demo application',
+      'Write the letters here',
+      name: 'questionField',
+      desc: 'questionField of the application',
     );
   }
 
+  String questionHelp() {
+    return Intl.message(
+      'Idea or Help',
+      name: 'questionHelp',
+      desc: 'questionHelp of the application',
+    );
+  }
+
+  String questionIntent() {
+    return Intl.message(
+      'You got 3 intent',
+      name: 'questionIntent',
+      desc: 'questionIntent of the application',
+    );
+  }
+
+
+
+  /* End  Question Page*/
+
+
+  /* Begin  Category Page*/
+  String welcome() {
+    return Intl.message(
+      'Welcome',
+      name: 'welcome',
+      desc: 'welcome of the application',
+    );
+  }
+
+  String fruit() {
+    return Intl.message(
+      'Fruits',
+      name: 'fruit',
+      desc: 'fruit of the application',
+    );
+  }
+  String sport() {
+    return Intl.message(
+      'Sports',
+      name: 'sport',
+      desc: 'sport of the application',
+    );
+  }
+
+  String things() {
+    return Intl.message(
+      'Things',
+      name: 'things',
+      desc: 'things of the application',
+    );
+  }
+
+  String all() {
+    return Intl.message(
+      'Combination',
+      name: 'all',
+      desc: 'all of the application',
+    );
+  }
+
+  String animal() {
+    return Intl.message(
+      'Animals',
+      name: 'animal',
+      desc: 'animal of the application',
+    );
+  }
+  String body() {
+    return Intl.message(
+      'Body',
+      name: 'body',
+      desc: 'body of the application',
+    );
+  }
+
+  String categorySelect() {
+    return Intl.message(
+      'Select the category',
+      name: 'categorySelect',
+      desc: 'categorySelect of the application',
+    );
+  }
+
+
+  /* fin  Category Page*/
+
+  /* Begin  Home Page*/
+
+  String home() {
+    return Intl.message(
+      'Home',
+      name: 'home',
+      desc: 'home of the application',
+    );
+  }
+  /* Fin  Home Page*/
+
+  /* Begin  Setting Page*/
+  String setting() {
+    return Intl.message(
+      'Setting',
+      name: 'setting',
+      desc: 'setting of the application',
+    );
+  }
+
+  String difficulty() {
+    return Intl.message(
+      'Difficulty',
+      name: 'difficulty',
+      desc: 'difficulty of the application',
+    );
+  }
+
+  String easy() {
+    return Intl.message(
+      'Easy',
+      name: 'easy',
+      desc: 'easy of the application',
+    );
+  }
+
+  String medium() {
+    return Intl.message(
+      'Medium',
+      name: 'medium',
+      desc: 'medium of the application',
+    );
+  }
+
+  String hard() {
+    return Intl.message(
+      'Hard',
+      name: 'hard',
+      desc: 'hard of the application',
+    );
+  }
+
+ /* End Setting Page*/
 }
 
 class AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

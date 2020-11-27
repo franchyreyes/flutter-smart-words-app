@@ -2,6 +2,8 @@ import 'dart:ui';
 
 import 'package:findwords/components/category_component.dart';
 import 'package:findwords/components/curvenavigationbar_component.dart';
+import 'package:findwords/locale/locales.dart';
+import 'package:findwords/model/category.dart';
 import 'package:findwords/screen/setting_page.dart';
 import 'package:findwords/utils/colors.dart';
 import 'package:findwords/utils/constant.dart';
@@ -19,17 +21,24 @@ class CategoryPage extends StatefulWidget {
 
 class _CategoryPageState extends State<CategoryPage> {
 
-  List<T9CategoryModel> listCategoryModel = [
-    T9CategoryModel(name:"Fruits", img:'dd'),
-    T9CategoryModel(name:"Fruits", img:'dd'),
-    T9CategoryModel(name:"Fruits", img:'dd'),
-    T9CategoryModel(name:"Fruits", img:'dd'),
-    T9CategoryModel(name:"Fruits", img:'dd')
+  List<Category> listCategoryModel = [
+    Category(name:"Fruits", img:'dd'),
+    Category(name:"Fruits", img:'dd'),
+    Category(name:"Fruits", img:'dd'),
+    Category(name:"Fruits", img:'dd'),
+    Category(name:"Fruits", img:'dd')
 
   ];
 
   @override
   Widget build(BuildContext context) {
+    listCategoryModel[0].name = AppLocalizations.of(context).fruit();
+    listCategoryModel[1].name = AppLocalizations.of(context).things();
+    listCategoryModel[2].name = AppLocalizations.of(context).sport();
+    listCategoryModel[3].name = AppLocalizations.of(context).animal();
+    listCategoryModel[4].name = AppLocalizations.of(context).body();
+    listCategoryModel[5].name = AppLocalizations.of(context).all();
+
     return Scaffold(
       appBar: null,
       body: Column(
@@ -50,7 +59,7 @@ class _CategoryPageState extends State<CategoryPage> {
                   child: Container(
                     padding: EdgeInsets.only(top: 50),
                     child: Text(
-                      ' Welcome, \n Find Words',
+                      AppLocalizations.of(context).welcome() + ' \n Find Words',
                       style: TextStyle(
                         color: t3_white,
                         fontSize: displayWidth(context) * 0.10,
@@ -69,7 +78,7 @@ class _CategoryPageState extends State<CategoryPage> {
                     Container(
                       width: displayWidth(context) * 0.80,
                       child: Text(
-                        'Select the category',
+                        AppLocalizations.of(context).categorySelect() ,
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             fontSize: displayWidth(context) * 0.07,

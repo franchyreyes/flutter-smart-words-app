@@ -1,3 +1,4 @@
+import 'package:findwords/model/category.dart';
 import 'package:findwords/screen/question_page.dart';
 import 'package:findwords/utils/colors.dart';
 import 'package:findwords/utils/constant.dart';
@@ -5,18 +6,16 @@ import 'package:findwords/utils/size_helper.dart';
 import 'package:flutter/material.dart';
 
 class CategoryComponent extends StatelessWidget {
-  final T9CategoryModel model;
+  final Category model;
 
-
-
-  CategoryComponent( this.model);
+  CategoryComponent(this.model);
 
   @override
   Widget build(BuildContext context) {
     return Wrap(
       children: <Widget>[
         GestureDetector(
-          onTap: (){
+          onTap: () {
             Navigator.pushNamed(context, QuestionPage.id);
           },
           child: Container(
@@ -26,7 +25,8 @@ class CategoryComponent extends StatelessWidget {
             child: Column(
               children: <Widget>[
                 Container(
-                  decoration: boxDecoration(bgColor: t3_white, radius: 12,showShadow: true),
+                  decoration: boxDecoration(
+                      bgColor: t3_white, radius: 12, showShadow: true),
                   child: Padding(
                     padding: EdgeInsets.all(12.0),
                     child: Image(
@@ -51,16 +51,23 @@ class CategoryComponent extends StatelessWidget {
 }
 
 class T9CategoryModel {
-  final String img;
-  final String name;
+  String img;
+  String name;
 
-  T9CategoryModel({
-    this.img,
-    this.name
-  });
+  T9CategoryModel({this.img, this.name});
+
+  /*String get getName => name;
+
+  set setName(String name) {
+    this.name = name;
+  }*/
 }
 
-BoxDecoration boxDecoration({double radius = 2, Color color = Colors.transparent, Color bgColor, var showShadow = false}) {
+BoxDecoration boxDecoration(
+    {double radius = 2,
+    Color color = Colors.transparent,
+    Color bgColor,
+    var showShadow = false}) {
   return BoxDecoration(
     color: t3_white,
     boxShadow: [BoxShadow(color: Colors.transparent)],
@@ -70,17 +77,17 @@ BoxDecoration boxDecoration({double radius = 2, Color color = Colors.transparent
 }
 
 Widget text(
-    String text, {
-      var fontSize = textSizeLargeMedium,
-      textColor = Colors.red,
-      var fontFamily,
-      var isCentered = false,
-      var maxLine = 1,
-      var latterSpacing = 0.5,
-      bool textAllCaps = false,
-      var isLongText = false,
-      bool lineThrough = false,
-    }) {
+  String text, {
+  var fontSize = textSizeLargeMedium,
+  textColor = Colors.red,
+  var fontFamily,
+  var isCentered = false,
+  var maxLine = 1,
+  var latterSpacing = 0.5,
+  bool textAllCaps = false,
+  var isLongText = false,
+  bool lineThrough = false,
+}) {
   return Text(
     textAllCaps ? text.toUpperCase() : text,
     textAlign: isCentered ? TextAlign.center : TextAlign.start,
@@ -92,8 +99,8 @@ Widget text(
       color: textColor,
       height: 1.5,
       letterSpacing: latterSpacing,
-      decoration: lineThrough ? TextDecoration.lineThrough : TextDecoration.none,
+      decoration:
+          lineThrough ? TextDecoration.lineThrough : TextDecoration.none,
     ),
   );
 }
-

@@ -4,25 +4,34 @@ import 'package:flutter/material.dart';
 
 class Category extends GenericEntity{
    final String documentID;
-   final String name;
+   String name;
+   final String img;
+   final int code;
+
    @override
    int  id;
 
    Category.withID({
      this.id,
      this.documentID,
-     this.name
+     this.name,
+     this.img,
+     this.code
    });
 
    Category({
      this.documentID,
-     this.name
+     this.name,
+     this.img,
+     this.code
    });
 
    Map<String, Object> toMap() {
      return {
        'documentID': documentID,
-       'name': name
+       'name': name,
+       'img': img,
+       'code': code
      };
    }
 
@@ -30,6 +39,8 @@ class Category extends GenericEntity{
      Category category = new Category(
        documentID: documentID,
        name: doc['name'],
+       img: doc['img'],
+       code: doc['code'],
      );
      return category;
    }
@@ -39,6 +50,8 @@ class Category extends GenericEntity{
        id: id,
        documentID: doc['documentID'],
        name: doc['name'],
+       img: doc['img'],
+       code: doc['code'],
      );
      return category;
    }
@@ -47,6 +60,8 @@ class Category extends GenericEntity{
      Category category = new Category(
        documentID: doc['documentID'],
        name: doc['name'],
+       img: doc['img'],
+       code: doc['code'],
      );
      return category;
    }

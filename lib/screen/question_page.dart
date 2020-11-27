@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:findwords/components/appbar_componet.dart';
 import 'package:findwords/components/textfield_component.dart';
+import 'package:findwords/locale/locales.dart';
 import 'package:findwords/utils/colors.dart';
 import 'package:findwords/utils/constant.dart';
 import 'package:findwords/utils/size_helper.dart';
@@ -68,7 +69,7 @@ class _QuestionPageState extends State<QuestionPage> {
       resizeToAvoidBottomInset: false,
       backgroundColor: t3_app_background,
       appBar: AppBar(
-        title: Text("Category"),
+        title: Text(AppLocalizations.of(context).categoryTitle()),
         flexibleSpace: AppbarComponent(),
         elevation: 0,
       ),
@@ -110,7 +111,7 @@ class _QuestionPageState extends State<QuestionPage> {
                     Container(
                       width: displayWidth(context) * 0.80,
                       child: Text(
-                        'Find the words',
+                          AppLocalizations.of(context).questionSubTitle(),
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             fontSize: displayWidth(context) * 0.07,
@@ -170,7 +171,7 @@ class _QuestionPageState extends State<QuestionPage> {
                       height: 20,
                     ),
                     Text(
-                      "Idea or Help",
+                      AppLocalizations.of(context).questionHelp(),
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: textSizeMedium,
@@ -200,7 +201,7 @@ class _QuestionPageState extends State<QuestionPage> {
                           height: 18,
                         ),
                         Text(
-                          "You got 3 intent",
+                          AppLocalizations.of(context).questionIntent(),
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: textSizeLargeMedium,

@@ -1,4 +1,5 @@
 import 'package:findwords/components/button_component.dart';
+import 'package:findwords/locale/locales.dart';
 import 'package:findwords/screen/category_page.dart';
 import 'package:findwords/screen/setting_page.dart';
 import 'package:findwords/utils/colors.dart';
@@ -73,7 +74,7 @@ class _HomePageState extends State<HomePage> {
                     child: Padding(
                       padding: EdgeInsets.fromLTRB(7, 20, 7, 20),
                       child: ButtonComponent(
-                          textContent: "Setting",
+                          textContent: AppLocalizations.of(context).setting(),
                           onPressed: () {
                             Navigator.pushNamed(context, SettingPage.id);
                           },
@@ -84,7 +85,7 @@ class _HomePageState extends State<HomePage> {
                       child: Padding(
                     padding: EdgeInsets.fromLTRB(7, 0, 7, 0),
                     child: ButtonComponent(
-                        textContent: "Home",
+                        textContent: AppLocalizations.of(context).home(),
                         onPressed: () {
                           Navigator.pushReplacementNamed(context, CategoryPage.id);
                         },
