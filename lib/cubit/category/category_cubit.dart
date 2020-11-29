@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:equatable/equatable.dart';
 import 'package:findwords/db/category_dao.dart';
+import 'package:findwords/fake/FakeDB.dart';
 import 'package:findwords/model/category.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
@@ -26,7 +27,7 @@ class CategoryCubit extends Cubit<CategoryState> {
   Future<void> addRandomCategory() async {
     try {
       emit(CategoriesLoadingState());
-      await _categoryDAO.put(RandomCategoryGenerator.getRandomCategory());
+      await _categoryDAO.put(RandomCategoryGenerator.getRandomCategory(0));
       var categoryList = await _categoryDAO.getAll(Category());
       emit(CategoriesLoadedState(categoryList));
     } catch (e) {
@@ -36,17 +37,3 @@ class CategoryCubit extends Cubit<CategoryState> {
   }
 }
 
-class RandomCategoryGenerator {
-  static final _categories = [
-    Category(name: 'Banana', documentID: "1x"),
-    Category(name: 'Strawberry', documentID: "2x"),
-    Category(name: 'Kiwi', documentID: "3x"),
-    Category(name: 'Apple', documentID: "4x"),
-    Category(name: 'Pear', documentID: "5x"),
-    Category(name: 'Lemon', documentID: "6x"),
-  ];
-
-  static Category getRandomCategory() {
-    return _categories[Random().nextInt(_categories.length)];
-  }
-}
