@@ -7,8 +7,12 @@ abstract class GenericRepository<T extends GenericEntity> {
 
   StoreRef<int, Map<String, dynamic>> store;
 
+
+  Future deleteTable() async {
+    return await store.drop(await db);
+  }
+
   Future put(T entity) async {
-    //await store.drop(await _db);
     return await store.add(await db, (entity).toMap());
   }
 

@@ -11,10 +11,10 @@ import 'package:meta/meta.dart';
 
 part 'language_state.dart';
 
-class CategoryCubit extends Cubit<LanguageState> {
+class LanguageCubit extends Cubit<LanguageState> {
   final LanguageDAO _languageDAO  = LanguageDAO();
 
-  CategoryCubit() : super(LanguageInitialState());
+  LanguageCubit() : super(LanguageInitialState());
 
   Future<void> reloadLanguage() async {
     try {
@@ -36,6 +36,16 @@ class CategoryCubit extends Cubit<LanguageState> {
     } catch (e) {
       print(e.toString());
       emit(LanguageErrorState(e.toString()));
+    }
+  }
+
+  Future<void> loadAllLanguage() async {
+    try {
+      await _languageDAO.deleteTable();
+      await _languageDAO.put(RandomLanguageGenerator.getRandomLanguage(0));
+      await _languageDAO.put(RandomLanguageGenerator.getRandomLanguage(1));
+    } catch (e) {
+      print("Error Language: " + e.toString());
     }
   }
 }

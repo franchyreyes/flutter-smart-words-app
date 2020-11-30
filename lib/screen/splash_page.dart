@@ -1,9 +1,13 @@
 import 'dart:async';
 
+import 'package:findwords/cubit/category/category_cubit.dart';
+import 'package:findwords/cubit/language/language_cubit.dart';
+import 'package:findwords/cubit/quiz/quiz_cubit.dart';
 import 'package:findwords/screen/HomePage.dart';
 import 'package:findwords/utils/colors.dart';
 import 'package:findwords/utils/size_helper.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SplashPage extends StatefulWidget {
   @override
@@ -14,12 +18,19 @@ class _SplashPageState extends State<SplashPage> {
   BuildContext context;
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   Timer _timer;
+  CategoryCubit _categoryCubit;
+  LanguageCubit _languageCubit;
+  //QuizCubit _quizCubit;
 
   startTime() async {
     _timer = Timer(new Duration(seconds: 2), navigationPage);
   }
 
   void navigationPage() {
+    _categoryCubit = BlocProvider.of<CategoryCubit>(_scaffoldKey.currentContext);
+    _languageCubit = BlocProvider.of<LanguageCubit>(_scaffoldKey.currentContext);
+    _categoryCubit.loadAllCategory();
+    _languageCubit.loadAllLanguage();
     Navigator.of(_scaffoldKey.currentContext).pushReplacementNamed(HomePage.id);
     startTime();
   }

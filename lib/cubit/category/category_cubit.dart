@@ -35,5 +35,20 @@ class CategoryCubit extends Cubit<CategoryState> {
       emit(CategoryErrorState(e.toString()));
     }
   }
+
+  Future<void> loadAllCategory() async {
+    try {
+      await _categoryDAO.deleteTable();
+      await _categoryDAO.put(RandomCategoryGenerator.getRandomCategory(0));
+      await _categoryDAO.put(RandomCategoryGenerator.getRandomCategory(1));
+      await _categoryDAO.put(RandomCategoryGenerator.getRandomCategory(2));
+      await _categoryDAO.put(RandomCategoryGenerator.getRandomCategory(3));
+      await _categoryDAO.put(RandomCategoryGenerator.getRandomCategory(4));
+      await _categoryDAO.put(RandomCategoryGenerator.getRandomCategory(5));
+
+    } catch (e) {
+      print("Error Category: " + e.toString());
+    }
+  }
 }
 

@@ -23,6 +23,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: null,
+
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
@@ -97,6 +98,12 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+          child: Icon(Icons.refresh),
+          onPressed: () {
+
+          }),
+
     );
   }
 }

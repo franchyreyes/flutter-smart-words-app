@@ -30,7 +30,7 @@ class CategoryComponent extends StatelessWidget {
                   child: Padding(
                     padding: EdgeInsets.all(12.0),
                     child: Image(
-                      image: AssetImage('images/lightbulb.png'),
+                      image: AssetImage('images/${model}'),
                       height: 70,
                       width: MediaQuery.of(context).size.width,
                     ),
