@@ -42,7 +42,4 @@ class CategoryErrorState extends CategoryState {
 
 }
 
-class CategoriesLoadingState extends CategoryState {
-
-
-}
+class CategoriesLoadingState extends CategoryState {}

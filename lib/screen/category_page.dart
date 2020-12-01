@@ -24,14 +24,6 @@ class _CategoryPageState extends State<CategoryPage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   CategoryCubit _categoryCubit;
 
-  List<Category> listCategoryModel = [
-    Category(name: "Fruits", img: 'dd'),
-    Category(name: "Fruits", img: 'dd'),
-    Category(name: "Fruits", img: 'dd'),
-    Category(name: "Fruits", img: 'dd'),
-    Category(name: "Fruits", img: 'dd')
-  ];
-
   @override
   void initState() {
     super.initState();
@@ -44,16 +36,10 @@ class _CategoryPageState extends State<CategoryPage> {
     super.didChangeDependencies();
   }
 
-  //_categoryCubit = BlocProvider.of<CategoryCubit>(_scaffoldKey.currentContext);
+
   @override
   Widget build(BuildContext context) {
     Locale myLocale = Localizations.localeOf(context);
-    /*listCategoryModel[0].name = AppLocalizations.of(context).fruit();
-    listCategoryModel[1].name = AppLocalizations.of(context).things();
-    listCategoryModel[2].name = AppLocalizations.of(context).sport();
-    listCategoryModel[3].name = AppLocalizations.of(context).animal();
-    listCategoryModel[4].name = AppLocalizations.of(context).body();
-    listCategoryModel[5].name = AppLocalizations.of(context).all();*/
 
     return BlocBuilder<CategoryCubit, CategoryState>(builder: (context, state) {
       if (state is CategoriesLoadingState) {
@@ -171,13 +157,6 @@ class _CategoryPageState extends State<CategoryPage> {
     });
   }
 
-  /*listCategoryModel[0].name = AppLocalizations.of(context).fruit();
-    listCategoryModel[1].name = AppLocalizations.of(context).things();
-    listCategoryModel[2].name = AppLocalizations.of(context).sport();
-    listCategoryModel[3].name = AppLocalizations.of(context).animal();
-    listCategoryModel[4].name = AppLocalizations.of(context).body();
-    listCategoryModel[5].name = AppLocalizations.of(context).all();*/
-
   String findSpanishText(index, BuildContext context) {
     switch (index) {
       case 0:
@@ -190,10 +169,10 @@ class _CategoryPageState extends State<CategoryPage> {
         return AppLocalizations.of(context).sport();
         break;
       case 3:
-        return AppLocalizations.of(context).body();
+        return AppLocalizations.of(context).animal();
         break;
       case 4:
-        return AppLocalizations.of(context).animal();
+        return AppLocalizations.of(context).body();
         break;
       case 5:
         return AppLocalizations.of(context).all();

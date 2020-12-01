@@ -34,7 +34,6 @@ dependencies:
   bloc: ^6.1.0
   shared_preferences: any
   flutter_custom_clippers: ^1.1.2
-  random_color: ^1.0.5
   assets_audio_player: ^2.0.13+1
 
   # The following adds the Cupertino Icons font to your application.

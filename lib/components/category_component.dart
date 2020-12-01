@@ -16,7 +16,9 @@ class CategoryComponent extends StatelessWidget {
       children: <Widget>[
         GestureDetector(
           onTap: () {
-            Navigator.pushNamed(context, QuestionPage.id);
+            Navigator.pushNamed(context, QuestionPage.id, arguments:{
+              "model": model
+            });
           },
           child: Container(
             width: displaySize(context).width,
@@ -30,7 +32,7 @@ class CategoryComponent extends StatelessWidget {
                   child: Padding(
                     padding: EdgeInsets.all(12.0),
                     child: Image(
-                      image: AssetImage('images/${model}'),
+                      image: AssetImage('images/${model.img}'),
                       height: 70,
                       width: MediaQuery.of(context).size.width,
                     ),

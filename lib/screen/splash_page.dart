@@ -20,17 +20,19 @@ class _SplashPageState extends State<SplashPage> {
   Timer _timer;
   CategoryCubit _categoryCubit;
   LanguageCubit _languageCubit;
-  //QuizCubit _quizCubit;
+  QuizCubit _quizCubit;
 
   startTime() async {
-    _timer = Timer(new Duration(seconds: 2), navigationPage);
+    _timer = Timer(new Duration(seconds: 3), navigationPage);
   }
 
-  void navigationPage() {
+  void navigationPage() async {
     _categoryCubit = BlocProvider.of<CategoryCubit>(_scaffoldKey.currentContext);
     _languageCubit = BlocProvider.of<LanguageCubit>(_scaffoldKey.currentContext);
-    _categoryCubit.loadAllCategory();
-    _languageCubit.loadAllLanguage();
+    _quizCubit = BlocProvider.of<QuizCubit>(_scaffoldKey.currentContext);
+    await _categoryCubit.loadAllCategory();
+    await _languageCubit.loadAllLanguage();
+    await _quizCubit.loadAllQuiz();
     Navigator.of(_scaffoldKey.currentContext).pushReplacementNamed(HomePage.id);
     startTime();
   }

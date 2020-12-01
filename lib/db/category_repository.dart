@@ -3,4 +3,5 @@ import 'package:findwords/model/category.dart';
 
 abstract class CategoryRepository extends GenericRepository<Category>{
 
+  Future<List<Category>> getAllCategory();
 }

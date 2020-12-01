@@ -36,7 +36,7 @@
     "type": "text",
     "placeholders": {}
   },
-  "fruit": "Fruitas",
+  "fruit": "Frutas",
   "@fruit": {
     "description": "fruit for the Demo application",
     "type": "text",

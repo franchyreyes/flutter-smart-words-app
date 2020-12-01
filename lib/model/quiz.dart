@@ -10,12 +10,17 @@ class Quiz extends GenericEntity {
   @override
   int id;
 
-  Quiz({this.documentID,
-    this.categoryID,
-    this.languageID,
-    this.quizDetailsList});
+  Quiz(
+      {this.documentID,
+      this.categoryID,
+      this.languageID,
+      this.quizDetailsList});
 
-  Quiz.withID({this.id, this.documentID, this.categoryID, this.languageID,
+  Quiz.withID(
+      {this.id,
+      this.documentID,
+      this.categoryID,
+      this.languageID,
       this.quizDetailsList});
 
   Map<String, Object> toMap() {
@@ -23,9 +28,9 @@ class Quiz extends GenericEntity {
       'documentID': documentID,
       'categoryID': categoryID,
       'languageID': languageID,
-      'quizDetail': [
-          for (int i = 0; i < quizDetailsList.length; i++)
-            quizDetailsList[i].toMap()
+      'questions': [
+        for (int i = 0; i < quizDetailsList.length; i++)
+          quizDetailsList[i].toMap()
       ]
     };
   }
@@ -34,7 +39,7 @@ class Quiz extends GenericEntity {
     List<QuizDetail> quizDetailsListMock = List<QuizDetail>();
 
     for (int i = 0; i < doc['questions'].length; i++) {
-      quizDetailsListMock.add(QuizDetail.fromDocumentList(doc, i));
+      quizDetailsListMock.add(QuizDetail.fromSembast(doc, i));
     }
 
     Quiz quiz = new Quiz.withID(
@@ -42,8 +47,7 @@ class Quiz extends GenericEntity {
         documentID: doc['documentID'].toString(),
         categoryID: doc['categoryID'].toString(),
         languageID: doc['languageID'].toString(),
-        quizDetailsList: quizDetailsListMock
-    );
+        quizDetailsList: quizDetailsListMock);
     return quiz;
   }
 

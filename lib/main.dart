@@ -30,10 +30,13 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider<LanguageCubit>(
             create: (BuildContext context) => LanguageCubit()
+        ),
+        BlocProvider<QuizCubit>(
+            create: (BuildContext context) => QuizCubit()
         )
       ],
       child: MaterialApp(
-          title: 'Flutter Demo',
+          title: 'Find Words',
           debugShowCheckedModeBanner: false,
           supportedLocales: [
             const Locale('en', ''),

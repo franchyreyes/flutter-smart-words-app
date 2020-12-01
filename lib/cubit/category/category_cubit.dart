@@ -17,7 +17,7 @@ class CategoryCubit extends Cubit<CategoryState> {
   Future<void> reloadCategory() async {
     try {
       emit(CategoriesLoadingState());
-      final categoryList = await _categoryDAO.getAll(Category());
+      final categoryList = await _categoryDAO.getAllCategory();
       emit(CategoriesLoadedState(categoryList));
     } catch (e) {
       emit(CategoryErrorState(e.toString()));

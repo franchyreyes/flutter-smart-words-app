@@ -7,7 +7,6 @@ abstract class GenericRepository<T extends GenericEntity> {
 
   StoreRef<int, Map<String, dynamic>> store;
 
-
   Future deleteTable() async {
     return await store.drop(await db);
   }
@@ -27,7 +26,6 @@ abstract class GenericRepository<T extends GenericEntity> {
   }
 
   Future<List<T>> getAll(T entity) async {
-
     final recordSnapshot = await store.find(await db);
 
     if (recordSnapshot.isNotEmpty) {
