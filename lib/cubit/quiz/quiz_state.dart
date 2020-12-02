@@ -45,6 +45,7 @@ class QuizErrorState extends QuizState {
 }
 
 class QuizLoadingState extends QuizState {}
+class QuizCompletedCategoryState extends QuizState {}
 
 class QuizLoadingOneQuestionState extends QuizState {
 

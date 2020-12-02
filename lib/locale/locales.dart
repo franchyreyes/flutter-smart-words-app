@@ -63,6 +63,29 @@ class AppLocalizations {
     );
   }
 
+  String questionDialogTitle() {
+    return Intl.message(
+      'Congratulations!',
+      name: 'questionDialogTitle',
+      desc: 'questionDialogTitle of the application',
+    );
+  }
+  String questionDialogText() {
+    return Intl.message(
+      'This category is completed.',
+      name: 'questionDialogText',
+      desc: 'questionDialogText of the application',
+    );
+  }
+  String questionDialogButton() {
+    return Intl.message(
+      'Change the category',
+      name: 'questionDialogButton',
+      desc: 'questionDialogButton of the application',
+    );
+  }
+
+
 
 
   /* End  Question Page*/

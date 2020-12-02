@@ -113,5 +113,23 @@
     "description": "hard for the Demo application",
     "type": "text",
     "placeholders": {}
+  },
+  "questionDialogTitle": "Felicidades!",
+  "@questionDialogTitle": {
+    "description": "questionDialogTitle for the Demo application",
+    "type": "text",
+    "placeholders": {}
+  },
+  "questionDialogText": "Esta categoria esta completa",
+  "@questionDialogText": {
+    "description": "questionDialogText for the Demo application",
+    "type": "text",
+    "placeholders": {}
+  },
+  "questionDialogButton": "Cambiar de categoria",
+  "@questionDialogButton": {
+    "description": "questionDialogButton for the Demo application",
+    "type": "text",
+    "placeholders": {}
   }
 }

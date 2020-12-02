@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:findwords/db/quiz_dao.dart';
 import 'package:findwords/fake/FakeDB.dart';
 import 'package:findwords/model/language.dart';
@@ -9,7 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 part 'quiz_state.dart';
 
 class QuizCubit extends Cubit<QuizState> {
-  final QuizDAO _quizDAO  = QuizDAO();
+  final QuizDAO _quizDAO = QuizDAO();
 
   QuizCubit() : super(QuizInitialState());
 
@@ -23,13 +21,21 @@ class QuizCubit extends Cubit<QuizState> {
     }
   }
 
-  Future<void> getQuestion(String categoryDocumentID, Language language) async {
+  Future<void> getQuizWithQuestionDetail(
+      String categoryDocumentID, Language language) async {
     try {
       emit(QuizLoadingState());
-      final quizList = await _quizDAO.getQuizByCategoryAndLanguage(categoryDocumentID, language);
-      emit(QuizLoadingOneQuestionState(quizList));
+      final quizList = await _quizDAO.getQuizByCategoryAndLanguage(
+          categoryDocumentID, language);
+      bool completedQuestion =
+          quizList.quizDetailsList.any((element) => element.completed != true);
+      if (completedQuestion) {
+        emit(QuizLoadingOneQuestionState(quizList));
+      } else {
+        emit(QuizCompletedCategoryState());
+      }
     } catch (e) {
-      //emit(QuizErrorState(e.toString()));
+      emit(QuizErrorState(e.toString()));
       print(e.toString());
     }
   }
@@ -47,12 +53,8 @@ class QuizCubit extends Cubit<QuizState> {
       await _quizDAO.put(RandomQuizGenerator.getRandomQuiz(7));
       await _quizDAO.put(RandomQuizGenerator.getRandomQuiz(8));
       await _quizDAO.put(RandomQuizGenerator.getRandomQuiz(9));
-
     } catch (e) {
       print("Error loadAllQuiz: " + e.toString());
     }
   }
-
 }
-
-

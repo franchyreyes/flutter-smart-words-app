@@ -113,5 +113,23 @@
     "description": "hard for the Demo application",
     "type": "text",
     "placeholders": {}
+  },
+  "questionDialogTitle": "Congratulations!",
+  "@questionDialogTitle": {
+    "description": "questionDialogTitle for the Demo application",
+    "type": "text",
+    "placeholders": {}
+  },
+  "questionDialogText": "This category is completed",
+  "@questionDialogText": {
+    "description": "questionDialogText for the Demo application",
+    "type": "text",
+    "placeholders": {}
+  },
+  "questionDialogButton": "Change the category",
+  "@questionDialogButton": {
+    "description": "questionDialogButton for the Demo application",
+    "type": "text",
+    "placeholders": {}
   }
 }

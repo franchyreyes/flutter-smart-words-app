@@ -1,5 +1,6 @@
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:findwords/components/appbar_componet.dart';
+import 'package:findwords/components/dialog_component.dart';
 import 'package:findwords/components/textfield_component.dart';
 import 'package:findwords/cubit/quiz/quiz_cubit.dart';
 import 'package:findwords/db/language_dao.dart';
@@ -37,7 +38,7 @@ class _QuestionPageState extends State<QuestionPage> {
     if (arguments != null) {
       this.model = arguments["model"] as Category;
       _languageDAO.getAppLanguage(myLocale.languageCode).then((language) {
-        _quizCubit.getQuestion(model.documentID, language);
+        _quizCubit.getQuizWithQuestionDetail(model.documentID, language);
       });
     }
   }
@@ -67,8 +68,17 @@ class _QuestionPageState extends State<QuestionPage> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<QuizCubit, QuizState>(builder: (context, state) {
-      if (state is QuizLoadingState) {
-        return CircularProgressIndicator();
+      if (state is QuizLoadingState || state is QuizInitialState) {
+        return Center(
+          child: CircularProgressIndicator(
+            valueColor: new AlwaysStoppedAnimation<Color>(
+              Color.fromRGBO(212, 20, 15, 1.0),
+            ),
+          ),
+        );
+      }
+      else if(state is QuizCompletedCategoryState){
+        return DialogComponent();
       }
       else if (state is QuizLoadingOneQuestionState) {
         return Scaffold(

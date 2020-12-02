@@ -43,7 +43,13 @@ class _CategoryPageState extends State<CategoryPage> {
 
     return BlocBuilder<CategoryCubit, CategoryState>(builder: (context, state) {
       if (state is CategoriesLoadingState) {
-        return CircularProgressIndicator();
+        return Center(
+          child: CircularProgressIndicator(
+            valueColor: new AlwaysStoppedAnimation<Color>(
+              Color.fromRGBO(212, 20, 15, 1.0),
+            ),
+          ),
+        );
       } else if (state is CategoriesLoadedState) {
         return Scaffold(
           key: _scaffoldKey,
