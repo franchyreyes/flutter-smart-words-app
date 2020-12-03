@@ -9,11 +9,17 @@ import 'package:findwords/utils/size_helper.dart';
 import 'package:flutter/material.dart';
 
 class TextFieldComponent extends StatefulWidget {
+  final Function(String) onChange;
+  final TextEditingController controller;
+  TextFieldComponent({@required this.onChange, this.controller});
+
   @override
   TextFieldComponentState createState() => TextFieldComponentState();
 }
 
 class TextFieldComponentState extends State<TextFieldComponent> {
+
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -22,7 +28,9 @@ class TextFieldComponentState extends State<TextFieldComponent> {
       decoration:
           boxDecoration(radius: 40, showShadow: true, bgColor: t3_white),
       child: TextFormField(
-
+        onChanged: widget.onChange,
+        keyboardType: TextInputType.text,
+        controller: widget.controller,
         maxLength: 1,
         style: TextStyle(fontSize: textSizeMedium, fontFamily: fontRegular),
         decoration: InputDecoration(

@@ -5,4 +5,5 @@ import 'package:findwords/model/quiz.dart';
 abstract class QuizRepository extends GenericRepository<Quiz>{
 
   Future<Quiz> getQuizByCategoryAndLanguage(String categoryDocumentID, Language language);
+  String showValidText(String answer, String userLetter);
 }

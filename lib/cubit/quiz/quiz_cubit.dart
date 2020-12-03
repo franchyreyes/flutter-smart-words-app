@@ -23,17 +23,28 @@ class QuizCubit extends Cubit<QuizState> {
 
   Future<void> getQuizWithQuestionDetail(
       String categoryDocumentID, Language language) async {
+
     try {
       emit(QuizLoadingState());
-      final quizList = await _quizDAO.getQuizByCategoryAndLanguage(
+     final quiz = await _quizDAO.getQuizByCategoryAndLanguage(
           categoryDocumentID, language);
       bool completedQuestion =
-          quizList.quizDetailsList.any((element) => element.completed != true);
+          quiz.quizDetailsList.any((element) => element.completed != true);
       if (completedQuestion) {
-        emit(QuizLoadingOneQuestionState(quizList));
+        emit(QuizLoadingOneQuestionState(quiz));
       } else {
         emit(QuizCompletedCategoryState());
       }
+    } catch (e) {
+      emit(QuizErrorState(e.toString()));
+      print(e.toString());
+    }
+  }
+
+  Future<void> checkWord(Quiz quiz) async{
+
+    try {
+        emit(QuizLoadingOneQuestionState(quiz));
     } catch (e) {
       emit(QuizErrorState(e.toString()));
       print(e.toString());

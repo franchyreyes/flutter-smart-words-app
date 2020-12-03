@@ -12,13 +12,33 @@ class QuizDAO extends QuizRepository {
   @override
   Future<Quiz> getQuizByCategoryAndLanguage(
       String categoryDocumentID, Language language) async {
-    var filterand = Filter.and([
+    var filterAnd = Filter.and([
       Filter.equals('categoryID', categoryDocumentID),
       Filter.equals('languageID', language.documentID)
     ]);
     var record =
-        await store.findFirst(await db, finder: Finder(filter: filterand));
+        await store.findFirst(await db, finder: Finder(filter: filterAnd));
     if (record == null) return null;
     return Quiz().fromMapGeneric(record.value, record.key);
+  }
+
+  String showValidText(String answer, String userLetter) {
+    String value = "";
+    String underScore = "_";
+    bool find = false;
+    for (int index = 0; index < answer.length; index++) {
+      for (int row = 0; row < userLetter.length; row++) {
+        if (answer[index] == userLetter[row]) {
+          value = value + answer[index];
+          find = true;
+          break;
+        }
+      }
+      if (!find) {
+        value = value + underScore;
+      }
+      find = false;
+    }
+    return value;
   }
 }

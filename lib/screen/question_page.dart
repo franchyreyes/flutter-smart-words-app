@@ -4,8 +4,10 @@ import 'package:findwords/components/dialog_component.dart';
 import 'package:findwords/components/textfield_component.dart';
 import 'package:findwords/cubit/quiz/quiz_cubit.dart';
 import 'package:findwords/db/language_dao.dart';
+import 'package:findwords/db/quiz_dao.dart';
 import 'package:findwords/locale/locales.dart';
 import 'package:findwords/model/category.dart';
+import 'package:findwords/model/quiz_detail.dart';
 import 'package:findwords/utils/colors.dart';
 import 'package:findwords/utils/constant.dart';
 import 'package:findwords/utils/size_helper.dart';
@@ -24,7 +26,10 @@ class QuestionPage extends StatefulWidget {
 class _QuestionPageState extends State<QuestionPage> {
   final assetsAudioPlayer = AssetsAudioPlayer();
   final LanguageDAO _languageDAO = LanguageDAO();
+  final QuizDAO _quizDAO = QuizDAO();
   QuizCubit _quizCubit;
+  final controller = TextEditingController();
+  String userLetter;
 
   Category model;
 
@@ -46,6 +51,7 @@ class _QuestionPageState extends State<QuestionPage> {
   @override
   void initState() {
     super.initState();
+    userLetter = "";
     assetsAudioPlayer.open(
       Audio("images/fw.mp3"),
     );
@@ -68,6 +74,7 @@ class _QuestionPageState extends State<QuestionPage> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<QuizCubit, QuizState>(builder: (context, state) {
+      print("hola");
       if (state is QuizLoadingState || state is QuizInitialState) {
         return Center(
           child: CircularProgressIndicator(
@@ -76,18 +83,19 @@ class _QuestionPageState extends State<QuestionPage> {
             ),
           ),
         );
-      }
-      else if(state is QuizCompletedCategoryState){
+      } else if (state is QuizCompletedCategoryState) {
         return DialogComponent();
-      }
-      else if (state is QuizLoadingOneQuestionState) {
+      } else if (state is QuizLoadingOneQuestionState) {
+        QuizDetail firstQuestionDetail = state.quiz.quizDetailsList
+            .firstWhere((element) => element.completed != true);
+
         return Scaffold(
           resizeToAvoidBottomInset: false,
           backgroundColor: t3_app_background,
           appBar: AppBar(
-            title: Text(
-                AppLocalizations.of(context).categoryTitle() + " " +
-                    model.name),
+            title: Text(AppLocalizations.of(context).categoryTitle() +
+                " " +
+                model.name),
             flexibleSpace: AppbarComponent(),
             elevation: 0,
           ),
@@ -157,13 +165,13 @@ class _QuestionPageState extends State<QuestionPage> {
                               decoration: new BoxDecoration(
                                 color: t3_gray,
                                 border:
-                                Border.all(color: Colors.grey, width: 1.0),
+                                    Border.all(color: Colors.grey, width: 1.0),
                                 borderRadius:
-                                BorderRadius.all(Radius.circular(15)),
+                                    BorderRadius.all(Radius.circular(15)),
                               ),
                               width: displayWidth(context) * 0.80,
                               child: Text(
-                                'P______',
+                                _quizDAO.showValidText(firstQuestionDetail.answer,userLetter),
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                   fontSize: displayWidth(context) * 0.07,
@@ -182,7 +190,15 @@ class _QuestionPageState extends State<QuestionPage> {
                               image: AssetImage('images/pencil.png'),
                               width: displayWidth(context) * 0.12,
                             ),
-                            TextFieldComponent(),
+                            TextFieldComponent(controller: controller,onChange: (value) {
+                              {
+                                if (controller.value.text.trim() != "") {
+                                  userLetter =
+                                      userLetter + controller.value.text;
+                                  _quizCubit.checkWord(state.quiz);
+                                  print(userLetter);
+                                }
+                              }}),
                           ],
                         ),
                         SizedBox(
@@ -208,9 +224,9 @@ class _QuestionPageState extends State<QuestionPage> {
                         Container(
                           width: displayWidth(context) * 0.85,
                           child: Text(
-                            "Background sticky concurrent mark sweep GC freed 14206(707KB) AllocSpace objects, 20(400KB) LOS objects, 23% free, 6MB/8MB, paused 5.040ms total 18.230ms",
-                            style: TextStyle(
-                                fontSize: 18, color: t3_icon_color),
+                              firstQuestionDetail.question,
+                            style:
+                                TextStyle(fontSize: 18, color: t3_icon_color),
                             textAlign: TextAlign.center,
                           ),
                         ),
@@ -266,8 +282,7 @@ class _QuestionPageState extends State<QuestionPage> {
             ],
           ),
         );
-      }
-      else {
+      } else {
         return Text('TESTING Question Page');
       }
     });
