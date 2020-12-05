@@ -132,12 +132,6 @@
     "type": "text",
     "placeholders": {}
   },
-  "questionDialogButton": "Change the category",
-  "@questionDialogButton": {
-    "description": "questionDialogButton for the Demo application",
-    "type": "text",
-    "placeholders": {}
-  },
   "dialogTextEndQuestion": "Buen Trabajo. Encontraste la palabra",
   "@dialogTextEndQuestion": {
     "description": "dialogTextEndQuestion for the Demo application",
@@ -147,6 +141,36 @@
   "dialogButtonEndQuestion": "Siguiente pregunta",
   "@dialogButtonEndQuestion": {
     "description": "dialogButtonEndQuestion for the Demo application",
+    "type": "text",
+    "placeholders": {}
+  },
+  "dialogTitleFailQuestion": "Fallaste!",
+  "@dialogTitleFailQuestion": {
+    "description": "dialogTitleFailQuestion for the Demo application",
+    "type": "text",
+    "placeholders": {}
+  },
+  "dialogTextFailQuestion": "No pudiste encontrar la respuesta",
+  "@dialogTextFailQuestion": {
+    "description": "dialogTextFailQuestion for the Demo application",
+    "type": "text",
+    "placeholders": {}
+  },
+  "dialogButtonFailQuestion": "Intentalo de nuevo",
+  "@dialogButtonFailQuestion": {
+    "description": "dialogButtonFailQuestion for the Demo application",
+    "type": "text",
+    "placeholders": {}
+  },
+  "dialogButtonFailByFailQuestion": "Seguir intentando",
+  "@dialogButtonFailByFailQuestion": {
+    "description": "dialogButtonFailByFailQuestion for the Demo application",
+    "type": "text",
+    "placeholders": {}
+  },
+  "dialogTextFailByFailQuestion": "Esta es letra es incorrecta",
+  "@dialogTextFailByFailQuestion": {
+    "description": "dialogTextFailByFailQuestion for the Demo application",
     "type": "text",
     "placeholders": {}
   }

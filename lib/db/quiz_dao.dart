@@ -42,4 +42,24 @@ class QuizDAO extends QuizRepository {
     return value;
   }
 
+  int failValidText(String answer, String userLetter) {
+    bool find = true;
+    int fail = 0;
+    if (userLetter.trim() == "") {
+      return fail;
+    }
+    for (int row = 0; row < userLetter.length; row++) {
+      for (int index = 0; index < answer.length; index++) {
+        if (answer[index] == userLetter[row]) {
+          find = false;
+          break;
+        }
+      }
+      if (find) {
+        fail = fail + 1;
+      }
+      find = true;
+    }
+    return fail;
+  }
 }

@@ -143,5 +143,35 @@
     "description": "dialogButtonEndQuestion for the Demo application",
     "type": "text",
     "placeholders": {}
+  },
+  "dialogTitleFailQuestion": "You failed!",
+  "@dialogTitleFailQuestion": {
+    "description": "dialogTitleFailQuestion for the Demo application",
+    "type": "text",
+    "placeholders": {}
+  },
+  "dialogTextFailQuestion": "You could not find the answer",
+  "@dialogTextFailQuestion": {
+    "description": "dialogTextFailQuestion for the Demo application",
+    "type": "text",
+    "placeholders": {}
+  },
+  "dialogButtonFailQuestion": "Try again",
+  "@dialogButtonFailQuestion": {
+    "description": "dialogButtonFailQuestion for the Demo application",
+    "type": "text",
+    "placeholders": {}
+  },
+  "dialogButtonFailByFailQuestion": "keep trying",
+  "@dialogButtonFailByFailQuestion": {
+    "description": "dialogButtonFailByFailQuestion for the Demo application",
+    "type": "text",
+    "placeholders": {}
+  },
+  "dialogTextFailByFailQuestion": "This letter is incorrect",
+  "@dialogTextFailByFailQuestion": {
+    "description": "dialogTextFailByFailQuestion for the Demo application",
+    "type": "text",
+    "placeholders": {}
   }
 }

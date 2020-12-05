@@ -10,11 +10,22 @@ class DialogComponent extends StatelessWidget {
   final String title;
   final String description;
   final String textButton;
-
-  DialogComponent({this.onPressed,this.color,this.title,this.description,this.textButton});
+  final bool duration;
+  DialogComponent({this.onPressed,this.color,this.title,this.description,this.textButton,this.duration});
 
   @override
   Widget build(BuildContext context) {
+    if(duration){
+      return Dialog(
+        insetAnimationDuration: const Duration(milliseconds: 2000),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16),
+        ),
+        elevation: 0.0,
+        backgroundColor: Colors.transparent,
+        child: dialogContent(context,this.onPressed,this.color,this.title,this.description,this.textButton),
+      );
+    }
     return Dialog(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),
@@ -23,6 +34,7 @@ class DialogComponent extends StatelessWidget {
       backgroundColor: Colors.transparent,
       child: dialogContent(context,this.onPressed,this.color,this.title,this.description,this.textButton),
     );
+
   }
 }
 

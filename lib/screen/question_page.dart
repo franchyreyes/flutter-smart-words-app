@@ -1,6 +1,7 @@
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:findwords/components/appbar_componet.dart';
 import 'package:findwords/components/dialog_component.dart';
+import 'package:findwords/components/fail_component.dart';
 import 'package:findwords/components/textfield_component.dart';
 import 'package:findwords/cubit/quiz/quiz_cubit.dart';
 import 'package:findwords/db/language_dao.dart';
@@ -89,29 +90,65 @@ class _QuestionPageState extends State<QuestionPage> {
           description: AppLocalizations.of(context).questionDialogText(),
           textButton: AppLocalizations.of(context).questionDialogButton(),
           color: Colors.green,
-          onPressed: (){
-              Navigator.pop(context);
-        },);
+          duration: false,
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        );
       } else if (state is QuizLoadingOneQuestionState) {
         QuizDetail firstQuestionDetail = state.quiz.quizDetailsList
             .firstWhere((element) => element.completed != true);
-        String secretText = _quizDAO.showValidText(firstQuestionDetail.answer,userLetter);
-        if(!secretText.contains('_')){
+        String secretText =
+            _quizDAO.showValidText(firstQuestionDetail.answer, userLetter);
+        int totalFail = _quizDAO.failValidText(firstQuestionDetail.answer, userLetter);
+        int failByFail = _quizDAO.failValidText(firstQuestionDetail.answer, controller.value.text);
+
+        if(totalFail >= 3){
+          return DialogComponent(
+            title: AppLocalizations.of(context).dialogTitleFailQuestion(),
+            description: AppLocalizations.of(context).dialogTextFailQuestion(),
+            textButton: AppLocalizations.of(context).dialogButtonFailQuestion(),
+            color: Colors.red,
+            duration: false,
+            onPressed: () {
+              setState(() {
+                userLetter = "";
+                controller.text = "";
+                _quizCubit.refreshScreen(state.quiz);
+              });
+            },
+          );
+        }
+        else if (!secretText.contains('_')) {
           return DialogComponent(
             title: AppLocalizations.of(context).questionDialogTitle(),
             description: AppLocalizations.of(context).dialogTextEndQuestion(),
             textButton: AppLocalizations.of(context).dialogButtonEndQuestion(),
             color: Colors.green,
-            onPressed: (){
-
+            duration: false,
+            onPressed: () {
               setState(() {
                 userLetter = "";
-
-                _quizCubit.updateCompletedQuestion(state.quiz,firstQuestionDetail);
+                controller.text = "";
+                _quizCubit.updateCompletedQuestion(
+                    state.quiz, firstQuestionDetail);
               });
             },
           );
-        }else {
+        }
+        else if(failByFail == 1){
+          return DialogComponent(
+            title: AppLocalizations.of(context).dialogTitleFailQuestion(),
+            description: AppLocalizations.of(context).dialogTextFailByFailQuestion() + " ( " + controller.value.text +" ) ",
+            textButton: AppLocalizations.of(context).dialogButtonFailByFailQuestion(),
+            color: Colors.red,
+            duration: true,
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          );
+        }
+        else {
           return Scaffold(
             resizeToAvoidBottomInset: false,
             backgroundColor: t3_app_background,
@@ -187,10 +224,10 @@ class _QuestionPageState extends State<QuestionPage> {
                                 padding: EdgeInsets.only(bottom: 8),
                                 decoration: new BoxDecoration(
                                   color: t3_gray,
-                                  border:
-                                  Border.all(color: Colors.grey, width: 1.0),
+                                  border: Border.all(
+                                      color: Colors.grey, width: 1.0),
                                   borderRadius:
-                                  BorderRadius.all(Radius.circular(15)),
+                                      BorderRadius.all(Radius.circular(15)),
                                 ),
                                 width: displayWidth(context) * 0.80,
                                 child: Text(
@@ -214,19 +251,20 @@ class _QuestionPageState extends State<QuestionPage> {
                                 width: displayWidth(context) * 0.12,
                               ),
                               TextFieldComponent(
-                                  controller: controller, onChange: (value) {
-                                {
-                                  if (controller.value.text.trim() != "") {
-                                    userLetter =
-                                        userLetter + controller.value.text;
-                                    setState(() {
-                                      _quizCubit.checkWord(state.quiz);
-                                    });
-                                    //
-                                    print(userLetter);
-                                  }
-                                }
-                              }),
+                                  controller: controller,
+                                  onChange: (value) {
+                                    {
+                                      if (controller.value.text.trim() != "") {
+                                        userLetter =
+                                            userLetter + controller.value.text;
+                                        setState(() {
+                                          _quizCubit.refreshScreen(state.quiz);
+                                        });
+                                        //
+                                        print(userLetter);
+                                      }
+                                    }
+                                  }),
                             ],
                           ),
                           SizedBox(
@@ -254,7 +292,7 @@ class _QuestionPageState extends State<QuestionPage> {
                             child: Text(
                               firstQuestionDetail.question,
                               style:
-                              TextStyle(fontSize: 18, color: t3_icon_color),
+                                  TextStyle(fontSize: 18, color: t3_icon_color),
                               textAlign: TextAlign.center,
                             ),
                           ),
@@ -262,6 +300,7 @@ class _QuestionPageState extends State<QuestionPage> {
                             height: 30,
                           ),
                           Column(
+                            mainAxisSize: MainAxisSize.max,
                             children: <Widget>[
                               Divider(
                                 height: 1,
@@ -280,26 +319,8 @@ class _QuestionPageState extends State<QuestionPage> {
                               SizedBox(
                                 height: 3,
                               ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: <Widget>[
-                                  Icon(
-                                    Icons.error,
-                                    color: Colors.red,
-                                    size: 60.0,
-                                  ),
-                                  Icon(
-                                    Icons.error,
-                                    color: Colors.red,
-                                    size: 60.0,
-                                  ),
-                                  Icon(
-                                    Icons.error,
-                                    color: Colors.red,
-                                    size: 60.0,
-                                  ),
-                                ],
-                              )
+                              FailComponent(intent: totalFail)
+
                             ],
                           )
                         ],
@@ -311,6 +332,7 @@ class _QuestionPageState extends State<QuestionPage> {
             ),
           );
         }
+
       } else {
         return Text('TESTING Question Page');
       }

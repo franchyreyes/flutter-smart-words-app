@@ -24,10 +24,9 @@ class QuizCubit extends Cubit<QuizState> {
 
   Future<void> getQuizWithQuestionDetail(
       String categoryDocumentID, Language language) async {
-
     try {
       emit(QuizLoadingState());
-     final quiz = await _quizDAO.getQuizByCategoryAndLanguage(
+      final quiz = await _quizDAO.getQuizByCategoryAndLanguage(
           categoryDocumentID, language);
       bool completedQuestion =
           quiz.quizDetailsList.any((element) => element.completed != true);
@@ -42,27 +41,29 @@ class QuizCubit extends Cubit<QuizState> {
     }
   }
 
-  Future<void> checkWord(Quiz quiz) async{
+  Future<void> refreshScreen(Quiz quiz) async {
     try {
-        emit(QuizLoadingOneQuestionState(quiz));
+      emit(QuizLoadingOneQuestionState(quiz));
     } catch (e) {
       emit(QuizErrorState(e.toString()));
       print(e.toString());
     }
   }
 
-  Future<void> updateCompletedQuestion(Quiz quiz, QuizDetail quizDetail) async{
-
+  Future<void> updateCompletedQuestion(Quiz quiz, QuizDetail quizDetail) async {
     try {
       emit(QuizLoadingState());
-      quiz.quizDetailsList.forEach((element) {
-       if(element.id  == quizDetail.id){
-          element.completed = true;
+      for (int i = 0; i < quiz.quizDetailsList.length; i++) {
+        if (quiz.quizDetailsList[i].number == quizDetail.number) {
+          print(quizDetail.answer);
+          quiz.quizDetailsList[i].completed = true;
+          break;
         }
-      });
+      }
+
       _quizDAO.update(quiz);
       bool completedQuestion =
-      quiz.quizDetailsList.any((element) => element.completed != true);
+          quiz.quizDetailsList.any((element) => element.completed != true);
       if (completedQuestion) {
         emit(QuizLoadingOneQuestionState(quiz));
       } else {

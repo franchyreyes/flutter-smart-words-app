@@ -104,6 +104,45 @@ class AppLocalizations {
 
 
 
+  String dialogTitleFailQuestion() {
+    return Intl.message(
+      'You failed!',
+      name: 'dialogTitleFailQuestion',
+      desc: 'dialogTitleFailQuestion of the application',
+    );
+  }
+  String dialogTextFailQuestion() {
+    return Intl.message(
+      'You could not find the answer',
+      name: 'dialogTextFailQuestion',
+      desc: 'dialogTextFailQuestion of the application',
+    );
+  }
+
+  String dialogButtonFailQuestion() {
+    return Intl.message(
+      'Try again',
+      name: 'dialogButtonFailQuestion',
+      desc: 'dialogButtonFailQuestion of the application',
+    );
+  }
+
+  String dialogButtonFailByFailQuestion() {
+    return Intl.message(
+      'keep trying',
+      name: 'dialogButtonFailByFailQuestion',
+      desc: 'dialogButtonFailByFailQuestion of the application',
+    );
+  }
+
+  String dialogTextFailByFailQuestion() {
+    return Intl.message(
+      'This letter is incorrect',
+      name: 'dialogTextFailByFailQuestion',
+      desc: 'dialogTextFailByFailQuestion of the application',
+    );
+  }
+
 
   /* End  Question Page*/
 
