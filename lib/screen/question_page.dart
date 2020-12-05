@@ -84,204 +84,233 @@ class _QuestionPageState extends State<QuestionPage> {
           ),
         );
       } else if (state is QuizCompletedCategoryState) {
-        return DialogComponent();
+        return DialogComponent(
+          title: AppLocalizations.of(context).questionDialogTitle(),
+          description: AppLocalizations.of(context).questionDialogText(),
+          textButton: AppLocalizations.of(context).questionDialogButton(),
+          color: Colors.green,
+          onPressed: (){
+              Navigator.pop(context);
+        },);
       } else if (state is QuizLoadingOneQuestionState) {
         QuizDetail firstQuestionDetail = state.quiz.quizDetailsList
             .firstWhere((element) => element.completed != true);
+        String secretText = _quizDAO.showValidText(firstQuestionDetail.answer,userLetter);
+        if(!secretText.contains('_')){
+          return DialogComponent(
+            title: AppLocalizations.of(context).questionDialogTitle(),
+            description: AppLocalizations.of(context).dialogTextEndQuestion(),
+            textButton: AppLocalizations.of(context).dialogButtonEndQuestion(),
+            color: Colors.green,
+            onPressed: (){
 
-        return Scaffold(
-          resizeToAvoidBottomInset: false,
-          backgroundColor: t3_app_background,
-          appBar: AppBar(
-            title: Text(AppLocalizations.of(context).categoryTitle() +
-                " " +
-                model.name),
-            flexibleSpace: AppbarComponent(),
-            elevation: 0,
-          ),
-          body: Column(
-            children: <Widget>[
-              Expanded(
-                flex: 1,
-                child: ClipPath(
-                  clipper: WaveClipperTwo(flip: true),
-                  child: Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(color: t3_white, width: 1.0),
-                        gradient: LinearGradient(colors: <Color>[
-                          t3_colorPrimary,
-                          t3_colorPrimaryDark
-                        ]),
-                        borderRadius: BorderRadius.all(Radius.circular(0.0)),
-                      ),
-                      child: Center(
-                        child: Container(
-                          alignment: Alignment.center,
-                          width: 130,
-                          height: 130,
-                          decoration: new BoxDecoration(
-                            color: t3_app_background,
-                            shape: BoxShape.circle,
-                          ),
-                          child: Image(
-                            image: AssetImage('images/${model.img}'),
-                            width: displayWidth(context) * 0.22,
-                          ),
+              setState(() {
+                userLetter = "";
+
+                _quizCubit.updateCompletedQuestion(state.quiz,firstQuestionDetail);
+              });
+            },
+          );
+        }else {
+          return Scaffold(
+            resizeToAvoidBottomInset: false,
+            backgroundColor: t3_app_background,
+            appBar: AppBar(
+              title: Text(AppLocalizations.of(context).categoryTitle() +
+                  " " +
+                  model.name),
+              flexibleSpace: AppbarComponent(),
+              elevation: 0,
+            ),
+            body: Column(
+              children: <Widget>[
+                Expanded(
+                  flex: 1,
+                  child: ClipPath(
+                    clipper: WaveClipperTwo(flip: true),
+                    child: Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(color: t3_white, width: 1.0),
+                          gradient: LinearGradient(colors: <Color>[
+                            t3_colorPrimary,
+                            t3_colorPrimaryDark
+                          ]),
+                          borderRadius: BorderRadius.all(Radius.circular(0.0)),
                         ),
-                      )),
+                        child: Center(
+                          child: Container(
+                            alignment: Alignment.center,
+                            width: 130,
+                            height: 130,
+                            decoration: new BoxDecoration(
+                              color: t3_app_background,
+                              shape: BoxShape.circle,
+                            ),
+                            child: Image(
+                              image: AssetImage('images/${model.img}'),
+                              width: displayWidth(context) * 0.22,
+                            ),
+                          ),
+                        )),
+                  ),
                 ),
-              ),
-              Expanded(
-                flex: 3,
-                child: Container(
-                  height: double.infinity,
-                  child: SingleChildScrollView(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Container(
-                          width: displayWidth(context) * 0.80,
-                          child: Text(
-                            AppLocalizations.of(context).questionSubTitle(),
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                                fontSize: displayWidth(context) * 0.07,
-                                color: t3_colorPrimaryDark,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: <Widget>[
-                            Image(
-                              image: AssetImage('images/lightbulb.png'),
-                              width: displayWidth(context) * 0.12,
-                            ),
-                            Container(
-                              padding: EdgeInsets.only(bottom: 8),
-                              decoration: new BoxDecoration(
-                                color: t3_gray,
-                                border:
-                                    Border.all(color: Colors.grey, width: 1.0),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(15)),
-                              ),
-                              width: displayWidth(context) * 0.80,
-                              child: Text(
-                                _quizDAO.showValidText(firstQuestionDetail.answer,userLetter),
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  fontSize: displayWidth(context) * 0.07,
-                                  fontWeight: FontWeight.bold,
-                                  letterSpacing: 10.0,
-                                  color: t3_icon_color,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: <Widget>[
-                            Image(
-                              image: AssetImage('images/pencil.png'),
-                              width: displayWidth(context) * 0.12,
-                            ),
-                            TextFieldComponent(controller: controller,onChange: (value) {
-                              {
-                                if (controller.value.text.trim() != "") {
-                                  userLetter =
-                                      userLetter + controller.value.text;
-                                  _quizCubit.checkWord(state.quiz);
-                                  print(userLetter);
-                                }
-                              }}),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 15,
-                        ),
-                        Divider(
-                          height: 1,
-                          color: Colors.grey,
-                        ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        Text(
-                          AppLocalizations.of(context).questionHelp(),
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: textSizeMedium,
-                              color: t3_colorPrimary),
-                        ),
-                        SizedBox(
-                          height: 5,
-                        ),
-                        Container(
-                          width: displayWidth(context) * 0.85,
-                          child: Text(
-                              firstQuestionDetail.question,
-                            style:
-                                TextStyle(fontSize: 18, color: t3_icon_color),
-                            textAlign: TextAlign.center,
-                          ),
-                        ),
-                        SizedBox(
-                          height: 30,
-                        ),
-                        Column(
-                          children: <Widget>[
-                            Divider(
-                              height: 1,
-                              color: Colors.grey,
-                            ),
-                            SizedBox(
-                              height: 18,
-                            ),
-                            Text(
-                              AppLocalizations.of(context).questionIntent(),
+                Expanded(
+                  flex: 3,
+                  child: Container(
+                    height: double.infinity,
+                    child: SingleChildScrollView(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Container(
+                            width: displayWidth(context) * 0.80,
+                            child: Text(
+                              AppLocalizations.of(context).questionSubTitle(),
+                              textAlign: TextAlign.center,
                               style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: textSizeLargeMedium,
-                                  color: t3_colorPrimary),
+                                  fontSize: displayWidth(context) * 0.07,
+                                  color: t3_colorPrimaryDark,
+                                  fontWeight: FontWeight.bold),
                             ),
-                            SizedBox(
-                              height: 3,
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: <Widget>[
+                              Image(
+                                image: AssetImage('images/lightbulb.png'),
+                                width: displayWidth(context) * 0.12,
+                              ),
+                              Container(
+                                padding: EdgeInsets.only(bottom: 8),
+                                decoration: new BoxDecoration(
+                                  color: t3_gray,
+                                  border:
+                                  Border.all(color: Colors.grey, width: 1.0),
+                                  borderRadius:
+                                  BorderRadius.all(Radius.circular(15)),
+                                ),
+                                width: displayWidth(context) * 0.80,
+                                child: Text(
+                                  secretText,
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    fontSize: displayWidth(context) * 0.07,
+                                    fontWeight: FontWeight.bold,
+                                    letterSpacing: 10.0,
+                                    color: t3_icon_color,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: <Widget>[
+                              Image(
+                                image: AssetImage('images/pencil.png'),
+                                width: displayWidth(context) * 0.12,
+                              ),
+                              TextFieldComponent(
+                                  controller: controller, onChange: (value) {
+                                {
+                                  if (controller.value.text.trim() != "") {
+                                    userLetter =
+                                        userLetter + controller.value.text;
+                                    setState(() {
+                                      _quizCubit.checkWord(state.quiz);
+                                    });
+                                    //
+                                    print(userLetter);
+                                  }
+                                }
+                              }),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 15,
+                          ),
+                          Divider(
+                            height: 1,
+                            color: Colors.grey,
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          Text(
+                            AppLocalizations.of(context).questionHelp(),
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: textSizeMedium,
+                                color: t3_colorPrimary),
+                          ),
+                          SizedBox(
+                            height: 5,
+                          ),
+                          Container(
+                            width: displayWidth(context) * 0.85,
+                            child: Text(
+                              firstQuestionDetail.question,
+                              style:
+                              TextStyle(fontSize: 18, color: t3_icon_color),
+                              textAlign: TextAlign.center,
                             ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                Icon(
-                                  Icons.error,
-                                  color: Colors.red,
-                                  size: 60.0,
-                                ),
-                                Icon(
-                                  Icons.error,
-                                  color: Colors.red,
-                                  size: 60.0,
-                                ),
-                                Icon(
-                                  Icons.error,
-                                  color: Colors.red,
-                                  size: 60.0,
-                                ),
-                              ],
-                            )
-                          ],
-                        )
-                      ],
+                          ),
+                          SizedBox(
+                            height: 30,
+                          ),
+                          Column(
+                            children: <Widget>[
+                              Divider(
+                                height: 1,
+                                color: Colors.grey,
+                              ),
+                              SizedBox(
+                                height: 18,
+                              ),
+                              Text(
+                                AppLocalizations.of(context).questionIntent(),
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: textSizeLargeMedium,
+                                    color: t3_colorPrimary),
+                              ),
+                              SizedBox(
+                                height: 3,
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  Icon(
+                                    Icons.error,
+                                    color: Colors.red,
+                                    size: 60.0,
+                                  ),
+                                  Icon(
+                                    Icons.error,
+                                    color: Colors.red,
+                                    size: 60.0,
+                                  ),
+                                  Icon(
+                                    Icons.error,
+                                    color: Colors.red,
+                                    size: 60.0,
+                                  ),
+                                ],
+                              )
+                            ],
+                          )
+                        ],
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ],
-          ),
-        );
+              ],
+            ),
+          );
+        }
       } else {
         return Text('TESTING Question Page');
       }

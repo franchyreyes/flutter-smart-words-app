@@ -4,7 +4,7 @@ class QuizDetail extends GenericEntity {
   final int number;
   final String answer;
   final String question;
-  final bool completed;
+  bool completed;
 
   QuizDetail({this.number, this.answer, this.question, this.completed});
 

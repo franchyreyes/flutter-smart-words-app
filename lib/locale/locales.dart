@@ -70,6 +70,7 @@ class AppLocalizations {
       desc: 'questionDialogTitle of the application',
     );
   }
+
   String questionDialogText() {
     return Intl.message(
       'This category is completed.',
@@ -82,6 +83,22 @@ class AppLocalizations {
       'Change the category',
       name: 'questionDialogButton',
       desc: 'questionDialogButton of the application',
+    );
+  }
+
+  String dialogTextEndQuestion() {
+    return Intl.message(
+      'Good Job!. You find it.',
+      name: 'dialogTextEndQuestion',
+      desc: 'dialogTextEndQuestion of the application',
+    );
+  }
+
+  String dialogButtonEndQuestion() {
+    return Intl.message(
+      'Next question',
+      name: 'dialogButtonEndQuestion',
+      desc: 'dialogButtonEndQuestion of the application',
     );
   }
 

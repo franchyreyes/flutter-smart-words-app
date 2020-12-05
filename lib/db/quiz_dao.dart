@@ -41,4 +41,5 @@ class QuizDAO extends QuizRepository {
     }
     return value;
   }
+
 }

@@ -2,6 +2,7 @@ import 'package:findwords/db/quiz_dao.dart';
 import 'package:findwords/fake/FakeDB.dart';
 import 'package:findwords/model/language.dart';
 import 'package:findwords/model/quiz.dart';
+import 'package:findwords/model/quiz_detail.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'quiz_state.dart';
@@ -42,9 +43,31 @@ class QuizCubit extends Cubit<QuizState> {
   }
 
   Future<void> checkWord(Quiz quiz) async{
-
     try {
         emit(QuizLoadingOneQuestionState(quiz));
+    } catch (e) {
+      emit(QuizErrorState(e.toString()));
+      print(e.toString());
+    }
+  }
+
+  Future<void> updateCompletedQuestion(Quiz quiz, QuizDetail quizDetail) async{
+
+    try {
+      emit(QuizLoadingState());
+      quiz.quizDetailsList.forEach((element) {
+       if(element.id  == quizDetail.id){
+          element.completed = true;
+        }
+      });
+      _quizDAO.update(quiz);
+      bool completedQuestion =
+      quiz.quizDetailsList.any((element) => element.completed != true);
+      if (completedQuestion) {
+        emit(QuizLoadingOneQuestionState(quiz));
+      } else {
+        emit(QuizCompletedCategoryState());
+      }
     } catch (e) {
       emit(QuizErrorState(e.toString()));
       print(e.toString());

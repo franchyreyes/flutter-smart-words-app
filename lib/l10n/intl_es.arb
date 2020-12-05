@@ -131,5 +131,23 @@
     "description": "questionDialogButton for the Demo application",
     "type": "text",
     "placeholders": {}
+  },
+  "questionDialogButton": "Change the category",
+  "@questionDialogButton": {
+    "description": "questionDialogButton for the Demo application",
+    "type": "text",
+    "placeholders": {}
+  },
+  "dialogTextEndQuestion": "Buen Trabajo. Encontraste la palabra",
+  "@dialogTextEndQuestion": {
+    "description": "dialogTextEndQuestion for the Demo application",
+    "type": "text",
+    "placeholders": {}
+  },
+  "dialogButtonEndQuestion": "Siguiente pregunta",
+  "@dialogButtonEndQuestion": {
+    "description": "dialogButtonEndQuestion for the Demo application",
+    "type": "text",
+    "placeholders": {}
   }
 }

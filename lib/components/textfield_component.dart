@@ -28,6 +28,7 @@ class TextFieldComponentState extends State<TextFieldComponent> {
       decoration:
           boxDecoration(radius: 40, showShadow: true, bgColor: t3_white),
       child: TextFormField(
+
         onChanged: widget.onChange,
         keyboardType: TextInputType.text,
         controller: widget.controller,
