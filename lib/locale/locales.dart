@@ -143,6 +143,38 @@ class AppLocalizations {
     );
   }
 
+  String errorLoading() {
+    return Intl.message(
+      'Error loading the data',
+      name: 'errorLoading',
+      desc: 'errorLoading of the application',
+    );
+  }
+
+  String statusMedium() {
+    return Intl.message(
+      'The difficulty of the game is medium, sometimes we will show you a brief summary and sometimes not.',
+      name: 'statusMedium',
+      desc: 'statusMedium of the application',
+    );
+  }
+  String goToSetting() {
+    return Intl.message(
+      'If you want to change the difficulty of the game. Go to settings',
+      name: 'goToSetting',
+      desc: 'goToSetting of the application',
+    );
+  }
+
+  String statusHard() {
+    return Intl.message(
+      'The difficulty of the game is hard, you cannot see the brief summary',
+      name: 'statusHard',
+      desc: 'statusHard of the application',
+    );
+  }
+
+
 
   /* End  Question Page*/
 

@@ -7,6 +7,7 @@ import 'package:findwords/locale/locales.dart';
 import 'package:findwords/model/category.dart';
 import 'package:findwords/screen/setting_page.dart';
 import 'package:findwords/utils/colors.dart';
+import 'package:findwords/utils/constant.dart';
 import 'package:findwords/utils/size_helper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -156,9 +157,17 @@ class _CategoryPageState extends State<CategoryPage> {
           ),
         );
       } else if (state is CategoryErrorState) {
-        return Text(state.message);
+        return Center(
+          child: Text(
+            AppLocalizations.of(context).errorLoading(),
+            style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: textSizeLarge,
+                color: t3_colorPrimary),
+          ),
+        );
       } else {
-        return Text("d");
+        return Text('');
       }
     });
   }

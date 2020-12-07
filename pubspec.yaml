@@ -35,6 +35,7 @@ dependencies:
   shared_preferences: any
   flutter_custom_clippers: ^1.1.2
   assets_audio_player: ^2.0.13+1
+  firebase_admob: ^0.10.3
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.

@@ -173,5 +173,29 @@
     "description": "dialogTextFailByFailQuestion for the Demo application",
     "type": "text",
     "placeholders": {}
+  },
+  "errorLoading": "Error loading the data",
+  "@errorLoading": {
+    "description": "errorLoading for the Demo application",
+    "type": "text",
+    "placeholders": {}
+  },
+  "statusMedium": "The difficulty of the game is medium, sometimes we will show you a brief summary and sometimes not.",
+  "@statusMedium": {
+    "description": "statusMedium for the Demo application",
+    "type": "text",
+    "placeholders": {}
+  },
+  "goToSetting": "\nIf you want to change the difficulty of the game. Go to settings.",
+  "@goToSetting": {
+    "description": "goToSetting for the Demo application",
+    "type": "text",
+    "placeholders": {}
+  },
+  "statusHard": "The difficulty of the game is hard, you cannot see the brief summary.",
+  "@statusHard": {
+    "description": "statusHard for the Demo application",
+    "type": "text",
+    "placeholders": {}
   }
 }

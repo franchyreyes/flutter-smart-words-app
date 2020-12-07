@@ -9,9 +9,12 @@ import 'package:findwords/db/quiz_dao.dart';
 import 'package:findwords/locale/locales.dart';
 import 'package:findwords/model/category.dart';
 import 'package:findwords/model/quiz_detail.dart';
+import 'package:findwords/utils/Configuracion_difficulty.dart';
+import 'package:findwords/utils/ad_manager.dart';
 import 'package:findwords/utils/colors.dart';
 import 'package:findwords/utils/constant.dart';
 import 'package:findwords/utils/size_helper.dart';
+import 'package:firebase_admob/firebase_admob.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -33,6 +36,45 @@ class _QuestionPageState extends State<QuestionPage> {
   String userLetter;
 
   Category model;
+  String difficultyGame;
+  bool alternativeMedium;
+
+  // TODO: Add _interstitialAd
+  InterstitialAd _interstitialAd;
+
+  // TODO: Add _isInterstitialAdReady
+  bool _isInterstitialAdReady;
+
+  // TODO: Implement _loadInterstitialAd()
+  void _loadInterstitialAd() {
+    _interstitialAd.load();
+  }
+
+  // TODO: Implement _onInterstitialAdEvent()
+  void _onInterstitialAdEvent(MobileAdEvent event) {
+    switch (event) {
+      case MobileAdEvent.loaded:
+        _isInterstitialAdReady = true;
+        break;
+      case MobileAdEvent.failedToLoad:
+        _isInterstitialAdReady = false;
+        print('Failed to load an interstitial ad');
+        break;
+      case MobileAdEvent.closed:
+        _isInterstitialAdReady = false;
+        break;
+      default:
+      // do nothing
+    }
+  }
+
+  void wrapperGetDifficulty() async {
+    await ConfigurationDifficulty.getDifficultySF().then((value) {
+      setState(() {
+        difficultyGame = value;
+      });
+    });
+  }
 
   @override
   void didChangeDependencies() {
@@ -51,8 +93,21 @@ class _QuestionPageState extends State<QuestionPage> {
 
   @override
   void initState() {
+    // TODO: Initialize _isInterstitialAdReady
+    _isInterstitialAdReady = false;
+
+    // TODO: Initialize _interstitialAd
+    _interstitialAd = InterstitialAd(
+      adUnitId: AdManager.interstitialAdUnitId,
+      listener: _onInterstitialAdEvent,
+    );
+
     super.initState();
+
+    wrapperGetDifficulty();
     userLetter = "";
+    alternativeMedium = false;
+    _loadInterstitialAd();
     assetsAudioPlayer.open(
       Audio("images/fw.mp3"),
     );
@@ -69,13 +124,13 @@ class _QuestionPageState extends State<QuestionPage> {
 
   void dispose() {
     super.dispose();
+    _interstitialAd?.dispose();
     assetsAudioPlayer.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<QuizCubit, QuizState>(builder: (context, state) {
-      print("hola");
       if (state is QuizLoadingState || state is QuizInitialState) {
         return Center(
           child: CircularProgressIndicator(
@@ -96,14 +151,35 @@ class _QuestionPageState extends State<QuestionPage> {
           },
         );
       } else if (state is QuizLoadingOneQuestionState) {
+
+        if (_isInterstitialAdReady) {
+          _interstitialAd.show();
+        }
         QuizDetail firstQuestionDetail = state.quiz.quizDetailsList
             .firstWhere((element) => element.completed != true);
         String secretText =
             _quizDAO.showValidText(firstQuestionDetail.answer, userLetter);
-        int totalFail = _quizDAO.failValidText(firstQuestionDetail.answer, userLetter);
-        int failByFail = _quizDAO.failValidText(firstQuestionDetail.answer, controller.value.text);
+        int totalFail =
+            _quizDAO.failValidText(firstQuestionDetail.answer, userLetter);
+        int failByFail = _quizDAO.failValidText(
+            firstQuestionDetail.answer, controller.value.text);
+        String status = firstQuestionDetail.question;
 
-        if(totalFail >= 3){
+        if (difficultyGame == STATUS_EASY) {
+          status = firstQuestionDetail.question;
+        } else if (difficultyGame == STATUS_MEDIUM) {
+          status = (alternativeMedium)
+              ? firstQuestionDetail.question
+              : AppLocalizations.of(context).statusMedium() +
+                  " " +
+                  AppLocalizations.of(context).goToSetting();
+        } else {
+          status = AppLocalizations.of(context).statusHard() +
+              " " +
+              AppLocalizations.of(context).goToSetting();
+        }
+
+        if (totalFail >= kAllowTotalFail) {
           return DialogComponent(
             title: AppLocalizations.of(context).dialogTitleFailQuestion(),
             description: AppLocalizations.of(context).dialogTextFailQuestion(),
@@ -118,8 +194,7 @@ class _QuestionPageState extends State<QuestionPage> {
               });
             },
           );
-        }
-        else if (!secretText.contains('_')) {
+        } else if (!secretText.contains(kUnderScore)) {
           return DialogComponent(
             title: AppLocalizations.of(context).questionDialogTitle(),
             description: AppLocalizations.of(context).dialogTextEndQuestion(),
@@ -130,25 +205,32 @@ class _QuestionPageState extends State<QuestionPage> {
               setState(() {
                 userLetter = "";
                 controller.text = "";
+                alternativeMedium = true;
                 _quizCubit.updateCompletedQuestion(
                     state.quiz, firstQuestionDetail);
               });
             },
           );
-        }
-        else if(failByFail == 1){
+        } else if (failByFail == kAllowFail) {
           return DialogComponent(
             title: AppLocalizations.of(context).dialogTitleFailQuestion(),
-            description: AppLocalizations.of(context).dialogTextFailByFailQuestion() + " ( " + controller.value.text +" ) ",
-            textButton: AppLocalizations.of(context).dialogButtonFailByFailQuestion(),
+            description:
+                AppLocalizations.of(context).dialogTextFailByFailQuestion() +
+                    " ( " +
+                    controller.value.text +
+                    " ) ",
+            textButton:
+                AppLocalizations.of(context).dialogButtonFailByFailQuestion(),
             color: Colors.red,
             duration: true,
             onPressed: () {
-              Navigator.pop(context);
+              setState(() {
+                controller.text = "";
+                _quizCubit.refreshScreen(state.quiz);
+              });
             },
           );
-        }
-        else {
+        } else {
           return Scaffold(
             resizeToAvoidBottomInset: false,
             backgroundColor: t3_app_background,
@@ -260,8 +342,6 @@ class _QuestionPageState extends State<QuestionPage> {
                                         setState(() {
                                           _quizCubit.refreshScreen(state.quiz);
                                         });
-                                        //
-                                        print(userLetter);
                                       }
                                     }
                                   }),
@@ -290,7 +370,7 @@ class _QuestionPageState extends State<QuestionPage> {
                           Container(
                             width: displayWidth(context) * 0.85,
                             child: Text(
-                              firstQuestionDetail.question,
+                              status,
                               style:
                                   TextStyle(fontSize: 18, color: t3_icon_color),
                               textAlign: TextAlign.center,
@@ -320,7 +400,6 @@ class _QuestionPageState extends State<QuestionPage> {
                                 height: 3,
                               ),
                               FailComponent(intent: totalFail)
-
                             ],
                           )
                         ],
@@ -332,9 +411,18 @@ class _QuestionPageState extends State<QuestionPage> {
             ),
           );
         }
-
+      } else if (state is QuizErrorState) {
+        return Center(
+          child: Text(
+            AppLocalizations.of(context).errorLoading(),
+            style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: textSizeLarge,
+                color: t3_colorPrimary),
+          ),
+        );
       } else {
-        return Text('TESTING Question Page');
+        return Text('');
       }
     });
   }

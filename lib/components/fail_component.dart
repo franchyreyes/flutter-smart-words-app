@@ -7,8 +7,6 @@ class FailComponent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print("intent: " + intent.toString());
-
     return Container(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,

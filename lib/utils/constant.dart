@@ -1,10 +1,11 @@
 /* Firebase and Sembast  Table Name */
-const String kTableLanguageName  = "language";
-const String kTableCategoryName  = "category";
-const String kTableQuizName  = "quiz";
+import 'package:shared_preferences/shared_preferences.dart';
 
-const String kDifficultyGame  = "kDifficultyGame";
+const String kTableLanguageName = "language";
+const String kTableCategoryName = "category";
+const String kTableQuizName = "quiz";
 
+const String kDifficultyGame = "kDifficultyGame";
 
 /*fonts*/
 const fontRegular = 'Regular';
@@ -20,3 +21,23 @@ const textSizeNormal = 20.0;
 const textSizeLarge = 24.0;
 const textSizeXLarge = 28.0;
 const textSizeXXLarge = 30.0;
+
+const kAllowTotalFail = 3;
+const kUnderScore = '_';
+const kAllowFail = 1;
+const STATUS_EASY = 'Status.easy';
+const STATUS_MEDIUM = 'Status.medium';
+
+
+
+enum Status { easy, medium, hard }
+
+void clearAllSharePreferences() async {
+  SharedPreferences preferences = await SharedPreferences.getInstance();
+  var arrayOfKey = [kDifficultyGame];
+  for (var key in arrayOfKey) {
+    if (preferences.containsKey(key)) {
+      await preferences.remove(key);
+    }
+  }
+}

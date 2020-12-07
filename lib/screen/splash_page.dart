@@ -4,10 +4,13 @@ import 'package:findwords/cubit/category/category_cubit.dart';
 import 'package:findwords/cubit/language/language_cubit.dart';
 import 'package:findwords/cubit/quiz/quiz_cubit.dart';
 import 'package:findwords/screen/HomePage.dart';
+import 'package:findwords/utils/Configuracion_difficulty.dart';
 import 'package:findwords/utils/colors.dart';
 import 'package:findwords/utils/size_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+
 
 class SplashPage extends StatefulWidget {
   @override
@@ -33,6 +36,7 @@ class _SplashPageState extends State<SplashPage> {
     await _categoryCubit.loadAllCategory();
     await _languageCubit.loadAllLanguage();
     await _quizCubit.loadAllQuiz();
+
     Navigator.of(_scaffoldKey.currentContext).pushReplacementNamed(HomePage.id);
     startTime();
   }
