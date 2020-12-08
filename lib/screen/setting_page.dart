@@ -1,4 +1,5 @@
 import 'package:findwords/components/appbar_componet.dart';
+import 'package:findwords/components/button_component.dart';
 import 'package:findwords/components/curvenavigationbar_component.dart';
 import 'package:findwords/locale/locales.dart';
 import 'package:findwords/screen/category_page.dart';
@@ -7,6 +8,7 @@ import 'package:findwords/utils/colors.dart';
 import 'package:findwords/utils/constant.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 class SettingPage extends StatefulWidget {
   static String id = "SettingPage_screen";
@@ -29,7 +31,6 @@ class _SettingPageState extends State<SettingPage> {
       setState(() {
         difficultyGame = value;
       });
-
     });
   }
 
@@ -53,9 +54,11 @@ class _SettingPageState extends State<SettingPage> {
     dataList[0].name = AppLocalizations.of(context).easy();
     dataList[1].name = AppLocalizations.of(context).medium();
     dataList[2].name = AppLocalizations.of(context).hard();
-    int _selectIndex = difficultyGame == "Status.easy" ? 0
-        : difficultyGame == "Status.medium" ? 1
-        : difficultyGame == "Status.hard" ? 2: 2;
+    int _selectIndex = difficultyGame == "Status.easy"
+        ? 0
+        : difficultyGame == "Status.medium"
+            ? 1
+            : difficultyGame == "Status.hard" ? 2 : 2;
 
     _controller.jumpToItem(_selectIndex);
     return Scaffold(
@@ -83,7 +86,6 @@ class _SettingPageState extends State<SettingPage> {
                   height: 200,
                   padding: EdgeInsets.only(top: 25.0),
                   child: ListWheelScrollView.useDelegate(
-
                     onSelectedItemChanged: (value) {
                       switch (value) {
                         case 0:
@@ -122,9 +124,7 @@ class _SettingPageState extends State<SettingPage> {
                                 color: t3_black),
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
-
                           ),
-
                         );
                       },
                     ),
@@ -132,6 +132,61 @@ class _SettingPageState extends State<SettingPage> {
                 ),
               ],
             ),
+            SizedBox(
+              height: 45,
+            ),
+            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: <
+                Widget>[
+              Padding(
+                padding: EdgeInsets.only(left: 20.0),
+                child: Text(
+                  AppLocalizations.of(context).titleReset(),
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+              ),
+              Container(
+                  margin: EdgeInsets.only(right: 35.0),
+                  child: ButtonComponent(
+                    textContent: AppLocalizations.of(context).yesReset() +
+                        "                      ",
+                    onPressed: () {
+                      Alert(
+                        context: context,
+                        type: AlertType.warning,
+                        title: AppLocalizations.of(context).titleReset(),
+                        desc:  AppLocalizations.of(context).textReset(),
+                        buttons: [
+                          DialogButton(
+                            child: Text(
+                              AppLocalizations.of(context).yesReset(),
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 20),
+                            ),
+                            onPressed: () {
+                              setState(() {
+                                ConfigurationDifficulty.setDifficultySF(Status.easy);
+                                difficultyGame = "Status.easy";
+                                Navigator.pop(context);
+                              });
+
+                            },
+                            color: Colors.green,
+                          ),
+                          DialogButton(
+                            child: Text(
+                              AppLocalizations.of(context).noReset(),
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 20),
+                            ),
+                            onPressed: () => Navigator.pop(context),
+                            color: Colors.red,
+                          )
+                        ],
+                      ).show();
+                    },
+                  ),
+                  color: null),
+            ])
           ],
         ),
       ),

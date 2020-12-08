@@ -2,9 +2,9 @@ import 'dart:ui';
 
 import 'package:findwords/components/category_component.dart';
 import 'package:findwords/components/curvenavigationbar_component.dart';
+import 'package:findwords/components/dialog_component.dart';
 import 'package:findwords/cubit/category/category_cubit.dart';
 import 'package:findwords/locale/locales.dart';
-import 'package:findwords/model/category.dart';
 import 'package:findwords/screen/setting_page.dart';
 import 'package:findwords/utils/colors.dart';
 import 'package:findwords/utils/constant.dart';
@@ -36,7 +36,6 @@ class _CategoryPageState extends State<CategoryPage> {
     _categoryCubit.reloadCategory();
     super.didChangeDependencies();
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -197,4 +196,36 @@ class _CategoryPageState extends State<CategoryPage> {
         break;
     }
   }
+}
+
+Widget getAppbar(BuildContext context) {
+  return new AppBar(
+      leading: new Container(),
+      backgroundColor: Colors.black,
+      title: const Text('Dashboard', style: TextStyle(color: Colors.white)),
+      elevation: 0.0,
+      centerTitle: true,
+      iconTheme: new IconThemeData(color: Colors.white),
+      actions: <Widget>[
+        PopupMenuItem(
+          child: GestureDetector(
+            child: Text(AppLocalizations.of(context).titleReset()),
+            onTap: () {
+              DialogComponent(
+                title: AppLocalizations.of(context).titleReset(),
+                description: AppLocalizations.of(context).textReset(),
+                textButton: AppLocalizations.of(context).yesReset(),
+                color: Colors.yellow,
+                duration: true,
+                onPressed2: () {
+                  Navigator.pop(context);
+                },
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              );
+            },
+          ),
+        ),
+      ]);
 }

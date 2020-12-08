@@ -6,7 +6,9 @@ import 'package:findwords/screen/category_page.dart';
 import 'package:findwords/screen/question_page.dart';
 import 'package:findwords/screen/setting_page.dart';
 import 'package:findwords/screen/splash_page.dart';
-import 'package:firebase_core/firebase_core.dart';
+import 'package:findwords/utils/ad_manager.dart';
+import 'package:firebase_admob/firebase_admob.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -16,8 +18,13 @@ import 'locale/locales.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  //await Firebase.initializeApp();
   runApp(MyApp());
+}
+
+Future<void> _initAdMob() {
+  // TODO: Initialize AdMob SDK
+  return FirebaseAdMob.instance.initialize(appId: AdManager.appId);
 }
 
 class MyApp extends StatelessWidget {

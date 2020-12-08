@@ -180,6 +180,37 @@ class AppLocalizations {
 
 
   /* Begin  Category Page*/
+
+  String titleReset() {
+    return Intl.message(
+      'Reset the game',
+      name: 'titleReset',
+      desc: 'titleReset of the application',
+    );
+  }
+
+  String textReset() {
+    return Intl.message(
+      'Are you sure you want to reset the game?',
+      name: 'textReset',
+      desc: 'textReset of the application',
+    );
+  }
+  String yesReset() {
+    return Intl.message(
+      'Yes',
+      name: 'yesReset',
+      desc: 'yesReset of the application',
+    );
+  }
+  String noReset() {
+    return Intl.message(
+      'No',
+      name: 'noReset',
+      desc: 'noReset of the application',
+    );
+  }
+
   String welcome() {
     return Intl.message(
       'Welcome',

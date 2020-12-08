@@ -186,7 +186,7 @@
     "type": "text",
     "placeholders": {}
   },
-  "goToSetting": "\nIf you want to change the difficulty of the game. Go to settings.",
+  "goToSetting": "\n\nIf you want to change the difficulty of the game. Go to settings.",
   "@goToSetting": {
     "description": "goToSetting for the Demo application",
     "type": "text",
@@ -195,6 +195,30 @@
   "statusHard": "The difficulty of the game is hard, you cannot see the brief summary.",
   "@statusHard": {
     "description": "statusHard for the Demo application",
+    "type": "text",
+    "placeholders": {}
+  },
+  "titleReset": "Reset the game",
+  "@titleReset": {
+    "description": "titleReset for the Demo application",
+    "type": "text",
+    "placeholders": {}
+  },
+  "textReset": "Are you sure you want to reset the game?",
+  "@textReset": {
+    "description": "textReset for the Demo application",
+    "type": "text",
+    "placeholders": {}
+  },
+  "yesReset": "Yes",
+  "@yesReset": {
+    "description": "yesReset for the Demo application",
+    "type": "text",
+    "placeholders": {}
+  },
+  "noReset": "No",
+  "@noReset": {
+    "description": "noReset for the Demo application",
     "type": "text",
     "placeholders": {}
   }

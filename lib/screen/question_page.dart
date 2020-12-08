@@ -149,6 +149,10 @@ class _QuestionPageState extends State<QuestionPage> {
           onPressed: () {
             Navigator.pop(context);
           },
+          onPressed2: () {
+            Navigator.pop(context);
+          },
+
         );
       } else if (state is QuizLoadingOneQuestionState) {
 
@@ -193,6 +197,13 @@ class _QuestionPageState extends State<QuestionPage> {
                 _quizCubit.refreshScreen(state.quiz);
               });
             },
+            onPressed2: () {
+              setState(() {
+                userLetter = "";
+                controller.text = "";
+                _quizCubit.refreshScreen(state.quiz);
+              });
+            },
           );
         } else if (!secretText.contains(kUnderScore)) {
           return DialogComponent(
@@ -202,6 +213,15 @@ class _QuestionPageState extends State<QuestionPage> {
             color: Colors.green,
             duration: false,
             onPressed: () {
+              setState(() {
+                userLetter = "";
+                controller.text = "";
+                alternativeMedium = true;
+                _quizCubit.updateCompletedQuestion(
+                    state.quiz, firstQuestionDetail);
+              });
+            },
+            onPressed2: () {
               setState(() {
                 userLetter = "";
                 controller.text = "";
@@ -224,6 +244,12 @@ class _QuestionPageState extends State<QuestionPage> {
             color: Colors.red,
             duration: true,
             onPressed: () {
+              setState(() {
+                controller.text = "";
+                _quizCubit.refreshScreen(state.quiz);
+              });
+            },
+            onPressed2: () {
               setState(() {
                 controller.text = "";
                 _quizCubit.refreshScreen(state.quiz);

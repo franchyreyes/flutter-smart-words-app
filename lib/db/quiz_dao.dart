@@ -22,6 +22,20 @@ class QuizDAO extends QuizRepository {
     return Quiz().fromMapGeneric(record.value, record.key);
   }
 
+  void resetGame() {
+    Future<List<Quiz>> quizList = this.getAll(Quiz());
+    if (quizList != null) {
+      quizList.then((list) {
+        for (int index = 0; index < list.length; index++) {
+          for (int i = 0; i < list[index].quizDetailsList.length; i++) {
+            list[index].quizDetailsList[i].completed = false;
+          }
+          this.update(list[index]);
+        }
+      });
+    }
+  }
+
   String showValidText(String answer, String userLetter) {
     String value = "";
     String underScore = "_";

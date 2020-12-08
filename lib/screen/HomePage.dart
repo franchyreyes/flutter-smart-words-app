@@ -31,7 +31,7 @@ class _HomePageState extends State<HomePage> {
           borderRadius: BorderRadius.all(Radius.circular(0.0)),
         ),
         child: Column(
-          //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           //crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             Expanded(
@@ -94,15 +94,26 @@ class _HomePageState extends State<HomePage> {
                   )),
                 ],
               ),
+            ),
+            Expanded(
+              flex: 0,
+              child: SizedBox(
+                  height: 70,
+              ),
             )
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-          child: Icon(Icons.refresh),
-          onPressed: () {
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {
+          // Add your onPressed code here!
+        },
 
-          }),
+        label: Text('Reload data'),
+        icon: Icon(Icons.refresh),
+        backgroundColor: Colors.green,
+      ),
 
     );
   }

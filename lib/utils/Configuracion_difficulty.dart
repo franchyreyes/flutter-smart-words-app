@@ -4,7 +4,6 @@ import 'constant.dart';
 
 class ConfigurationDifficulty {
   static Future<void> setDifficultySF(Status difficulty) async {
-    print(difficulty.toString());
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString(kDifficultyGame, difficulty.toString());
   }

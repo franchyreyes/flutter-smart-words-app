@@ -168,7 +168,7 @@
     "type": "text",
     "placeholders": {}
   },
-  "dialogTextFailByFailQuestion": "Esta es letra es incorrecta",
+  "dialogTextFailByFailQuestion": "Esta letra es incorrecta",
   "@dialogTextFailByFailQuestion": {
     "description": "dialogTextFailByFailQuestion for the Demo application",
     "type": "text",
@@ -186,7 +186,7 @@
     "type": "text",
     "placeholders": {}
   },
-  "goToSetting": "\nSi quieres cambiar la dificultad del juego. Ir a la configuración.",
+  "goToSetting": "\n\nSi quieres cambiar la dificultad del juego. Ir a la configuración.",
   "@goToSetting": {
     "description": "goToSetting for the Demo application",
     "type": "text",
@@ -195,6 +195,30 @@
   "statusHard": "La dificultad del juego es difícil, no puedes ver el breve resumen.",
   "@statusHard": {
     "description": "statusHard for the Demo application",
+    "type": "text",
+    "placeholders": {}
+  },
+  "titleReset": "Reiniciar el juego",
+  "@titleReset": {
+    "description": "titleReset for the Demo application",
+    "type": "text",
+    "placeholders": {}
+  },
+  "textReset": "Estas seguro que quieres reiniciar o resetear el juego?",
+  "@textReset": {
+    "description": "textReset for the Demo application",
+    "type": "text",
+    "placeholders": {}
+  },
+  "yesReset": "Si",
+  "@yesReset": {
+    "description": "yesReset for the Demo application",
+    "type": "text",
+    "placeholders": {}
+  },
+  "noReset": "No",
+  "@noReset": {
+    "description": "noReset for the Demo application",
     "type": "text",
     "placeholders": {}
   }

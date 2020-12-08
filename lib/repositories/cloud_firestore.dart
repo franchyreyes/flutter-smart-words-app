@@ -37,13 +37,13 @@ class CloudFireStore implements ICloudRepository {
 
   Future<List<Language>> getAllLanguage() async {
     List<Language> languageList = [];
-    await FirebaseFirestore.instance
+    await Firestore.instance
         .collection(kTableLanguageName)
-        .get()
+        .getDocuments()
         .then((querySnapshot) {
-      querySnapshot.docs.forEach((document) {
-        languageList
-            .add(Language.fromDocumentWithID(document.data(), document.id));
+      querySnapshot.documents.forEach((document) {
+        languageList.add(
+            Language.fromDocumentWithID(document.data, document.documentID));
       });
     });
     return languageList;
@@ -51,13 +51,13 @@ class CloudFireStore implements ICloudRepository {
 
   Future<List<Category>> getAllCategory() async {
     List<Category> categoryList = [];
-    await FirebaseFirestore.instance
+    await Firestore.instance
         .collection(kTableCategoryName)
-        .get()
+        .getDocuments()
         .then((querySnapshot) {
-      querySnapshot.docs.forEach((document) {
-        categoryList
-            .add(Category.fromDocumentWithID(document.data(), document.id));
+      querySnapshot.documents.forEach((document) {
+        categoryList.add(
+            Category.fromDocumentWithID(document.data, document.documentID));
       });
     });
     return categoryList;
@@ -65,13 +65,14 @@ class CloudFireStore implements ICloudRepository {
 
   Future<List<Quiz>> getAllQuiz() async {
     List<Quiz> quizList = [];
-    await FirebaseFirestore.instance
+    await Firestore.instance
         .collection(kTableQuizName)
-        .doc('7Gax3pSD2s2WtSihDZX5')
-        .get()
+        .getDocuments()
         .then((querySnapshot) {
-      quizList
-          .add(Quiz.fromDocumentWithID(querySnapshot.data(), querySnapshot.id));
+      querySnapshot.documents.forEach((document) {
+        quizList
+            .add(Quiz.fromDocumentWithID(document.data, document.documentID));
+      });
     });
 
     return quizList;

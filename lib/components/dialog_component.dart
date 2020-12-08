@@ -6,12 +6,13 @@ import 'package:flutter/material.dart';
 
 class DialogComponent extends StatelessWidget {
   final VoidCallback onPressed;
+  final VoidCallback onPressed2;
   final Color color;
   final String title;
   final String description;
   final String textButton;
   final bool duration;
-  DialogComponent({this.onPressed,this.color,this.title,this.description,this.textButton,this.duration});
+  DialogComponent({this.onPressed,this.onPressed2,this.color,this.title,this.description,this.textButton,this.duration});
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +24,7 @@ class DialogComponent extends StatelessWidget {
         ),
         elevation: 0.0,
         backgroundColor: Colors.transparent,
-        child: dialogContent(context,this.onPressed,this.color,this.title,this.description,this.textButton),
+        child: dialogContent(context,this.onPressed,this.onPressed2,this.color,this.title,this.description,this.textButton),
       );
     }
     return Dialog(
@@ -32,13 +33,13 @@ class DialogComponent extends StatelessWidget {
       ),
       elevation: 0.0,
       backgroundColor: Colors.transparent,
-      child: dialogContent(context,this.onPressed,this.color,this.title,this.description,this.textButton),
+      child: dialogContent(context,this.onPressed,this.onPressed2,this.color,this.title,this.description,this.textButton),
     );
 
   }
 }
 
-dialogContent(BuildContext context, VoidCallback onPressed,Color colorParam , String title, String description,String textButton) {
+dialogContent(BuildContext context, VoidCallback onPressed,VoidCallback onPressed2,Color colorParam , String title, String description,String textButton) {
   return Container(
       decoration: BoxDecoration(
         color: t3_app_background,
@@ -57,7 +58,7 @@ dialogContent(BuildContext context, VoidCallback onPressed,Color colorParam , St
         mainAxisSize: MainAxisSize.min, // To make the card compact
         children: <Widget>[
           GestureDetector(
-            onTap: onPressed,
+            onTap: onPressed2,
             child: Container(
               padding: EdgeInsets.all(16),
               alignment: Alignment.centerRight,
