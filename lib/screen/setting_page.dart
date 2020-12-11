@@ -1,6 +1,7 @@
 import 'package:findwords/components/appbar_componet.dart';
 import 'package:findwords/components/button_component.dart';
 import 'package:findwords/components/curvenavigationbar_component.dart';
+import 'package:findwords/db/quiz_dao.dart';
 import 'package:findwords/locale/locales.dart';
 import 'package:findwords/screen/category_page.dart';
 import 'package:findwords/utils/Configuracion_difficulty.dart';
@@ -20,6 +21,7 @@ class SettingPage extends StatefulWidget {
 class _SettingPageState extends State<SettingPage> {
   String difficultyGame;
   final _controller = FixedExtentScrollController();
+  QuizDAO _quizDAO = QuizDAO();
 
   void initState() {
     super.initState();
@@ -54,11 +56,11 @@ class _SettingPageState extends State<SettingPage> {
     dataList[0].name = AppLocalizations.of(context).easy();
     dataList[1].name = AppLocalizations.of(context).medium();
     dataList[2].name = AppLocalizations.of(context).hard();
-    int _selectIndex = difficultyGame == "Status.easy"
+    int _selectIndex = difficultyGame == STATUS_EASY
         ? 0
-        : difficultyGame == "Status.medium"
+        : difficultyGame == STATUS_MEDIUM
             ? 1
-            : difficultyGame == "Status.hard" ? 2 : 2;
+            : difficultyGame == STATUS_HARD ? 2 : 2;
 
     _controller.jumpToItem(_selectIndex);
     return Scaffold(
@@ -154,7 +156,7 @@ class _SettingPageState extends State<SettingPage> {
                         context: context,
                         type: AlertType.warning,
                         title: AppLocalizations.of(context).titleReset(),
-                        desc:  AppLocalizations.of(context).textReset(),
+                        desc: AppLocalizations.of(context).textReset(),
                         buttons: [
                           DialogButton(
                             child: Text(
@@ -164,11 +166,32 @@ class _SettingPageState extends State<SettingPage> {
                             ),
                             onPressed: () {
                               setState(() {
-                                ConfigurationDifficulty.setDifficultySF(Status.easy);
-                                difficultyGame = "Status.easy";
+                                ConfigurationDifficulty.setDifficultySF(
+                                    Status.easy);
+                                difficultyGame = STATUS_EASY;
+                                _quizDAO.resetGame();
                                 Navigator.pop(context);
+                                Alert(
+                                  context: context,
+                                  type: AlertType.success,
+                                  title:
+                                      AppLocalizations.of(context).titleReset(),
+                                  desc: AppLocalizations.of(context)
+                                      .completedReset(),
+                                  buttons: [
+                                    DialogButton(
+                                      child: Text(
+                                        AppLocalizations.of(context).okReset(),
+                                        style: TextStyle(
+                                            color: Colors.white, fontSize: 20),
+                                      ),
+                                      onPressed: () => Navigator.pop(context),
+                                      width: 120,
+                                      color: Colors.green,
+                                    )
+                                  ],
+                                ).show();
                               });
-
                             },
                             color: Colors.green,
                           ),
@@ -186,7 +209,40 @@ class _SettingPageState extends State<SettingPage> {
                     },
                   ),
                   color: null),
-            ])
+            ]),
+            SizedBox(
+              height: 45,
+            ),
+            Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Padding(
+                    padding: EdgeInsets.only(left: 20.0),
+                    child: Text(
+                      AppLocalizations.of(context).reloadGame(),
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(right: 80.0),
+                      alignment: Alignment.center,
+                      decoration: new BoxDecoration(
+                        color: Colors.green,
+                        shape: BoxShape.circle,
+                      ),
+                    child: IconButton(
+                      color: t3_white,
+                      icon: Icon(Icons.refresh),
+                      tooltip: AppLocalizations.of(context).reloadGame(),
+                      onPressed: () {
+                        setState(() {
+
+                        });
+                      },
+                    ),
+                  )
+                ])
           ],
         ),
       ),

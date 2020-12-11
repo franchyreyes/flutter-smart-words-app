@@ -27,6 +27,7 @@ const kUnderScore = '_';
 const kAllowFail = 1;
 const STATUS_EASY = 'Status.easy';
 const STATUS_MEDIUM = 'Status.medium';
+const STATUS_HARD = 'Status.hard';
 
 
 

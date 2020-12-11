@@ -221,5 +221,17 @@
     "description": "noReset for the Demo application",
     "type": "text",
     "placeholders": {}
+  },
+  "completedReset": "This game was restarted successfully!",
+  "@completedReset": {
+    "description": "completedReset for the Demo application",
+    "type": "text",
+    "placeholders": {}
+  },
+  "reloadGame": "Reload data",
+  "@reloadGame": {
+    "description": "reloadGame for the Demo application",
+    "type": "text",
+    "placeholders": {}
   }
 }

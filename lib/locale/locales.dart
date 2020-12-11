@@ -211,6 +211,30 @@ class AppLocalizations {
     );
   }
 
+  String okReset() {
+    return Intl.message(
+      'OK',
+      name: 'okReset',
+      desc: 'okReset of the application',
+    );
+  }
+
+  String completedReset() {
+    return Intl.message(
+      'This game was restarted successfully!',
+      name: 'completedReset',
+      desc: 'completedReset of the application',
+    );
+  }
+  String reloadGame() {
+    return Intl.message(
+      'Reload data',
+      name: 'reloadGame',
+      desc: 'reloadGame of the application',
+    );
+  }
+
+
   String welcome() {
     return Intl.message(
       'Welcome',

@@ -22,7 +22,7 @@ class QuizDAO extends QuizRepository {
     return Quiz().fromMapGeneric(record.value, record.key);
   }
 
-  void resetGame() {
+  void resetGame() async {
     Future<List<Quiz>> quizList = this.getAll(Quiz());
     if (quizList != null) {
       quizList.then((list) {
