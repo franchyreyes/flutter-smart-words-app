@@ -23,7 +23,6 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: null,
-
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
@@ -88,7 +87,8 @@ class _HomePageState extends State<HomePage> {
                     child: ButtonComponent(
                         textContent: AppLocalizations.of(context).home(),
                         onPressed: () {
-                          Navigator.pushReplacementNamed(context, CategoryPage.id);
+                          Navigator.pushReplacementNamed(
+                              context, CategoryPage.id);
                         },
                         color: t3_app_background.withOpacity(0.2)),
                   )),
@@ -98,23 +98,12 @@ class _HomePageState extends State<HomePage> {
             Expanded(
               flex: 0,
               child: SizedBox(
-                  height: 70,
+                height: 40,
               ),
             )
           ],
         ),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {
-          // Add your onPressed code here!
-        },
-
-        label: Text('Reload data'),
-        icon: Icon(Icons.refresh),
-        backgroundColor: Colors.green,
-      ),
-
     );
   }
 }

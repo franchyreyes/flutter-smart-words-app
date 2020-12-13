@@ -1,3 +1,3 @@
 abstract class ICloudRepository{
-  void loadData();
+  Future<bool> loadData();
 }

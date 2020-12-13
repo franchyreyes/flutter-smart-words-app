@@ -1,14 +1,19 @@
 import 'package:findwords/components/appbar_componet.dart';
 import 'package:findwords/components/button_component.dart';
 import 'package:findwords/components/curvenavigationbar_component.dart';
+import 'package:findwords/cubit/category/category_cubit.dart';
+import 'package:findwords/cubit/language/language_cubit.dart';
+import 'package:findwords/cubit/quiz/quiz_cubit.dart';
 import 'package:findwords/db/quiz_dao.dart';
 import 'package:findwords/locale/locales.dart';
+import 'package:findwords/repositories/cloud_firestore.dart';
 import 'package:findwords/screen/category_page.dart';
 import 'package:findwords/utils/Configuracion_difficulty.dart';
 import 'package:findwords/utils/colors.dart';
 import 'package:findwords/utils/constant.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
 class SettingPage extends StatefulWidget {
@@ -22,6 +27,10 @@ class _SettingPageState extends State<SettingPage> {
   String difficultyGame;
   final _controller = FixedExtentScrollController();
   QuizDAO _quizDAO = QuizDAO();
+  CategoryCubit _categoryCubit;
+  LanguageCubit _languageCubit;
+  QuizCubit _quizCubit;
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   void initState() {
     super.initState();
@@ -226,18 +235,39 @@ class _SettingPageState extends State<SettingPage> {
                   ),
                   Container(
                     margin: EdgeInsets.only(right: 80.0),
-                      alignment: Alignment.center,
-                      decoration: new BoxDecoration(
-                        color: Colors.green,
-                        shape: BoxShape.circle,
-                      ),
+                    alignment: Alignment.center,
+                    decoration: new BoxDecoration(
+                      color: Colors.green,
+                      shape: BoxShape.circle,
+                    ),
                     child: IconButton(
                       color: t3_white,
                       icon: Icon(Icons.refresh),
                       tooltip: AppLocalizations.of(context).reloadGame(),
                       onPressed: () {
                         setState(() {
+                          ConfigurationLoadingFirebase.getLoadingSF()
+                              .then((valueSharedPreferences) {
+                            final DateFormat formatter =
+                                DateFormat('yyyy-MM-dd');
+                            final DateTime now = DateTime.now();
+                            final String dateString = formatter.format(now);
 
+                            if (valueSharedPreferences.trim() == "" ||
+                                (formatter
+                                    .parse(valueSharedPreferences)
+                                    .isBefore(formatter.parse(dateString)))) {
+                              CloudFireStore().loadData().then((check) {
+                                if (check) {
+                                  ConfigurationLoadingFirebase.setLoadingSF(
+                                      value: dateString); // som
+                                } else {
+                                  ConfigurationLoadingFirebase.setLoadingSF(
+                                      value: ""); // som
+                                }
+                              });
+                            }
+                          });
                         });
                       },
                     ),

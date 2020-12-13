@@ -18,21 +18,27 @@ class CloudFireStore implements ICloudRepository {
   List<Quiz> quizList;
 
   @override
-  void loadData() {
+  Future<bool> loadData() async {
     convertFutureToList();
     if ((categoryList != null) &&
         (languageList != null) &&
         (quizList != null)) {
-      categoryDAO.batchPut(categoryList);
-      languageDAO.batchPut(languageList);
-      quizDAO.batchPut(quizList);
+      await categoryDAO.deleteTable();
+      await languageDAO.deleteTable();
+      await quizDAO.deleteTable();
+      await categoryDAO.batchPut(categoryList);
+      await languageDAO.batchPut(languageList);
+      await quizDAO.batchPut(quizList);
+      return true;
     }
+    return false;
   }
 
   void convertFutureToList() async {
     categoryList = await getAllCategory();
     languageList = await getAllLanguage();
     quizList = await getAllQuiz();
+    await Future.delayed(const Duration(seconds: 5));
   }
 
   Future<List<Language>> getAllLanguage() async {

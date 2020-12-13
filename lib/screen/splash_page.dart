@@ -10,8 +10,6 @@ import 'package:findwords/utils/size_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-
-
 class SplashPage extends StatefulWidget {
   @override
   _SplashPageState createState() => _SplashPageState();
@@ -30,12 +28,19 @@ class _SplashPageState extends State<SplashPage> {
   }
 
   void navigationPage() async {
-    _categoryCubit = BlocProvider.of<CategoryCubit>(_scaffoldKey.currentContext);
-    _languageCubit = BlocProvider.of<LanguageCubit>(_scaffoldKey.currentContext);
+    _categoryCubit =
+        BlocProvider.of<CategoryCubit>(_scaffoldKey.currentContext);
+    _languageCubit =
+        BlocProvider.of<LanguageCubit>(_scaffoldKey.currentContext);
     _quizCubit = BlocProvider.of<QuizCubit>(_scaffoldKey.currentContext);
-    await _categoryCubit.loadAllCategory();
-    await _languageCubit.loadAllLanguage();
-    await _quizCubit.loadAllQuiz();
+    ConfigurationLoading.getLoadingSF().then((check) async {
+      if (!check) {
+        await _categoryCubit.loadAllCategory();
+        await _languageCubit.loadAllLanguage();
+        await _quizCubit.loadAllQuiz();
+        ConfigurationLoading.setLoadingSF(value: !check);
+      }
+    });
 
     Navigator.of(_scaffoldKey.currentContext).pushReplacementNamed(HomePage.id);
     startTime();
@@ -46,6 +51,7 @@ class _SplashPageState extends State<SplashPage> {
     super.initState();
     startTime();
   }
+
   @override
   void dispose() {
     super.dispose();

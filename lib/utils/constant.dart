@@ -6,6 +6,9 @@ const String kTableCategoryName = "category";
 const String kTableQuizName = "quiz";
 
 const String kDifficultyGame = "kDifficultyGame";
+const String kConfigurationLoading = "configurationLoading";
+const String kConfigurationLoadingFirebase = "configurationLoadingFirebase";
+
 
 /*fonts*/
 const fontRegular = 'Regular';
