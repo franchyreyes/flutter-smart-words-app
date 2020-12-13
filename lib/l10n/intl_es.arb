@@ -233,5 +233,29 @@
     "description": "reloadGame for the Demo application",
     "type": "text",
     "placeholders": {}
+  },
+  "errorLoadingTryLater": "Solo puede utilizar esta opción una vez al día. Error al cargar los datos",
+  "@errorLoadingTryLater": {
+    "description": "errorLoadingTryLater for the Demo application",
+    "type": "text",
+    "placeholders": {}
+  },
+  "errorLoadingTryAgain": "\nError al cargar los datos. Inténtalo de nuevo",
+  "@errorLoadingTryAgain": {
+    "description": "errorLoadingTryAgain for the Demo application",
+    "type": "text",
+    "placeholders": {}
+  },
+  "noteReloadGame": "NOTA: Por defecto la aplicación tiene los datos. Sin embargo, esta acción actualiza las nuevas preguntas desde la nube, si encuentra nuevas.",
+  "@noteReloadGame": {
+    "description": "noteReloadGame for the Demo application",
+    "type": "text",
+    "placeholders": {}
+  },
+  "successLoading": "La data se actualizó con éxito!",
+  "@successLoading": {
+    "description": "successLoading for the Demo application",
+    "type": "text",
+    "placeholders": {}
   }
 }

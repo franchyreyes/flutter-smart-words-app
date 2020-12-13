@@ -98,7 +98,7 @@ class _HomePageState extends State<HomePage> {
             Expanded(
               flex: 0,
               child: SizedBox(
-                height: 40,
+                height: 10,
               ),
             )
           ],

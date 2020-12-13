@@ -151,6 +151,36 @@ class AppLocalizations {
     );
   }
 
+  String errorLoadingTryLater() {
+    return Intl.message(
+      'You can only use this option once a day. Error loading the data',
+      name: 'errorLoadingTryLater',
+      desc: 'errorLoadingTryLater of the application',
+    );
+  }
+  String noteReloadGame() {
+    return Intl.message(
+      'NOTE: By default, the application has the data. However, this action updates the new questions from the cloud, if it finds new ones.',
+      name: 'noteReloadGame',
+      desc: 'noteReloadGame of the application',
+    );
+  }
+
+  String errorLoadingTryAgain() {
+    return Intl.message(
+      'Error loading the data. Try again',
+      name: 'errorLoadingTryAgain',
+      desc: 'errorLoadingTryAgain of the application',
+    );
+  }
+  String successLoading() {
+    return Intl.message(
+      'the data was updated successfully',
+      name: 'successLoading',
+      desc: 'successLoading of the application',
+    );
+  }
+
   String statusMedium() {
     return Intl.message(
       'The difficulty of the game is medium, sometimes we will show you a brief summary and sometimes not.',

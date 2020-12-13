@@ -233,5 +233,29 @@
     "description": "reloadGame for the Demo application",
     "type": "text",
     "placeholders": {}
+  },
+  "errorLoadingTryLater": "You can only use this option once a day. Error loading the data",
+  "@errorLoadingTryLater": {
+    "description": "errorLoadingTryLater for the Demo application",
+    "type": "text",
+    "placeholders": {}
+  },
+  "errorLoadingTryAgain": "Error loading the data. Try again",
+  "@errorLoadingTryAgain": {
+    "description": "errorLoadingTryAgain for the Demo application",
+    "type": "text",
+    "placeholders": {}
+  },
+  "noteReloadGame": "NOTE: By default, the application has the data. However, this action updates the new questions from the cloud, if it finds new ones.",
+  "@noteReloadGame": {
+    "description": "noteReloadGame for the Demo application",
+    "type": "text",
+    "placeholders": {}
+  },
+  "successLoading": "\nThe data was updated successfully!",
+  "@successLoading": {
+    "description": "successLoading for the Demo application",
+    "type": "text",
+    "placeholders": {}
   }
 }
