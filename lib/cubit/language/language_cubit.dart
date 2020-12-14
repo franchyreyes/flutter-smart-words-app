@@ -1,13 +1,8 @@
-import 'dart:math';
 
-import 'package:equatable/equatable.dart';
-import 'package:findwords/db/category_dao.dart';
 import 'package:findwords/db/language_dao.dart';
 import 'package:findwords/fake/FakeDB.dart';
-import 'package:findwords/model/category.dart';
 import 'package:findwords/model/language.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:meta/meta.dart';
 
 part 'language_state.dart';
 

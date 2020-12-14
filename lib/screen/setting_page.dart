@@ -348,7 +348,7 @@ class _SettingPageState extends State<SettingPage> {
                             ).show();
                           }
 
-                          new Future.delayed(new Duration(seconds:2),
+                          new Future.delayed(new Duration(seconds:4),
                                   () {
                                 setState(() {
                                   _showSpinner = false;

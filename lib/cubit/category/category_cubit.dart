@@ -40,7 +40,7 @@ class CategoryCubit extends Cubit<CategoryState> {
       await _categoryDAO.put(RandomCategoryGenerator.getRandomCategory(2));
       await _categoryDAO.put(RandomCategoryGenerator.getRandomCategory(3));
       await _categoryDAO.put(RandomCategoryGenerator.getRandomCategory(4));
-      await _categoryDAO.put(RandomCategoryGenerator.getRandomCategory(5));
+     // await _categoryDAO.put(RandomCategoryGenerator.getRandomCategory(5));
 
     } catch (e) {
       print("Error Category: " + e.toString());

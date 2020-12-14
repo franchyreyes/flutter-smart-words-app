@@ -33,7 +33,7 @@ dependencies:
   path_provider: ^1.6.21
   sembast: ^2.4.7+7
   flutter_bloc: ^6.0.6
-  equatable: ^1.2.5
+  #equatable: ^1.2.5
   bloc: ^6.1.0
   shared_preferences: any
   flutter_custom_clippers: ^1.1.2

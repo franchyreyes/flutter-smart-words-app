@@ -201,8 +201,8 @@ class RandomQuizGenerator {
         languageID: "xgu77VtAk4YE3iiMTiyv",
         quizDetailsList: [
           QuizDetail(number: 1,question:  "These fruits are red or green on the outside but white on the inside. It has a balloon shape, a bit sunken at its ends. Its flavor is between sour and sweet.",completed: false,answer: "apple"),
-          QuizDetail(number: 2,question:  "A sweet fruits, with long and curved shape similar to a cucumber. ",completed: false,answer: "banana"),
-          QuizDetail(number: 3,question:  "It is a fruit that has a rounded shape. It is used to make wines.  Is sweet and contains black seeds",completed: false,answer: "grapes"),
+          QuizDetail(number: 2,question:  "A sweet fruits, with long and curved shape similar to a cucumber.",completed: false,answer: "banana"),
+          QuizDetail(number: 3,question:  "It is a fruit that has a rounded shape. It is used to make wines. Is sweet and contains black seeds",completed: false,answer: "grapes"),
           QuizDetail(number: 4,question:  "A small, juicy, red fruit shaped like a cone with seeds on its surface",completed: false,answer: "strawberry"),
           QuizDetail(number: 5,question:  "A fruit grown in the hotter parts of the earth, having an oval shape, a large seed, and juicy, orange-yellow flesh",completed: false,answer: "mango"),
           QuizDetail(number: 6,question:  "A large, juicy fruit that grows in hotter regions, having a rough skin, a short stem, and pointed leaves on the top, or its sweet, yellow flesh",completed: false,answer: "pineapple"),

@@ -160,7 +160,7 @@ class AppLocalizations {
   }
   String noteReloadGame() {
     return Intl.message(
-      'NOTE: By default, the application has the data. However, this action updates the new questions from the cloud, if it finds new ones.',
+      'NOTE: By default, the application has the data. However, this action updates the new questions from the cloud(INTERNET), if it finds new ones.',
       name: 'noteReloadGame',
       desc: 'noteReloadGame of the application',
     );

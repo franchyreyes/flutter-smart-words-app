@@ -19,7 +19,7 @@ class CloudFireStore implements ICloudRepository {
 
   @override
   Future<bool> loadData() async {
-    convertFutureToList();
+    await convertFutureToList();
     if ((categoryList != null) &&
         (languageList != null) &&
         (quizList != null)) {
@@ -34,11 +34,10 @@ class CloudFireStore implements ICloudRepository {
     return false;
   }
 
-  void convertFutureToList() async {
+  Future convertFutureToList() async {
     categoryList = await getAllCategory();
     languageList = await getAllLanguage();
     quizList = await getAllQuiz();
-    await Future.delayed(const Duration(seconds: 5));
   }
 
   Future<List<Language>> getAllLanguage() async {

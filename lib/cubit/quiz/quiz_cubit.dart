@@ -28,6 +28,9 @@ class QuizCubit extends Cubit<QuizState> {
       emit(QuizLoadingState());
       final quiz = await _quizDAO.getQuizByCategoryAndLanguage(
           categoryDocumentID, language);
+      print("categoryDocumentID: " + categoryDocumentID);
+      print("language: " + language.documentID);
+      print(quiz.quizDetailsList.length);
       bool completedQuestion =
           quiz.quizDetailsList.any((element) => element.completed != true);
       if (completedQuestion) {

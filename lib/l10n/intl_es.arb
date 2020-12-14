@@ -246,7 +246,7 @@
     "type": "text",
     "placeholders": {}
   },
-  "noteReloadGame": "NOTA: Por defecto la aplicación tiene los datos. Sin embargo, esta acción actualiza las nuevas preguntas desde la nube, si encuentra nuevas.",
+  "noteReloadGame": "NOTA: Por defecto la aplicación tiene los datos. Sin embargo, esta acción actualiza las nuevas preguntas desde la nube(INTERNET), si encuentra nuevas.",
   "@noteReloadGame": {
     "description": "noteReloadGame for the Demo application",
     "type": "text",

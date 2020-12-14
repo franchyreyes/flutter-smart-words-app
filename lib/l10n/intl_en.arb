@@ -246,7 +246,7 @@
     "type": "text",
     "placeholders": {}
   },
-  "noteReloadGame": "NOTE: By default, the application has the data. However, this action updates the new questions from the cloud, if it finds new ones.",
+  "noteReloadGame": "NOTE: By default, the application has the data. However, this action updates the new questions from the cloud(INTERNET), if it finds new ones.",
   "@noteReloadGame": {
     "description": "noteReloadGame for the Demo application",
     "type": "text",

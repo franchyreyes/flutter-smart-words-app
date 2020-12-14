@@ -38,9 +38,10 @@ enum Status { easy, medium, hard }
 
 void clearAllSharePreferences() async {
   SharedPreferences preferences = await SharedPreferences.getInstance();
-  var arrayOfKey = [kDifficultyGame];
+  var arrayOfKey = [kDifficultyGame,kConfigurationLoading,kConfigurationLoadingFirebase];
   for (var key in arrayOfKey) {
     if (preferences.containsKey(key)) {
+      print(key);
       await preferences.remove(key);
     }
   }
