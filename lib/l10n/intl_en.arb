@@ -132,7 +132,7 @@
     "type": "text",
     "placeholders": {}
   },
-  "dialogTextEndQuestion": "Good Job!. You find it",
+  "dialogTextEndQuestion": "Good Job!. You found it.",
   "@dialogTextEndQuestion": {
     "description": "dialogTextEndQuestion for the Demo application",
     "type": "text",

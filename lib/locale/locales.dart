@@ -88,7 +88,7 @@ class AppLocalizations {
 
   String dialogTextEndQuestion() {
     return Intl.message(
-      'Good Job!. You find it.',
+      'Good Job!. You found it.',
       name: 'dialogTextEndQuestion',
       desc: 'dialogTextEndQuestion of the application',
     );

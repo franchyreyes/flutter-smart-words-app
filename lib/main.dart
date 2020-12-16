@@ -10,6 +10,7 @@ import 'package:findwords/utils/ad_manager.dart';
 import 'package:firebase_admob/firebase_admob.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -19,7 +20,11 @@ import 'locale/locales.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   //await Firebase.initializeApp();
-  runApp(MyApp());
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
+      .then((_) {
+    runApp(new MyApp());
+  });
+  //runApp(MyApp());
 }
 
 Future<void> _initAdMob() {
