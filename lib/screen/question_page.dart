@@ -19,6 +19,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class QuestionPage extends StatefulWidget {
   static String id = "QuestionPage_screen";
@@ -27,13 +28,14 @@ class QuestionPage extends StatefulWidget {
   _QuestionPageState createState() => _QuestionPageState();
 }
 
-class _QuestionPageState extends State<QuestionPage> {
+class _QuestionPageState extends State<QuestionPage> with WidgetsBindingObserver {
   final assetsAudioPlayer = AssetsAudioPlayer();
   final LanguageDAO _languageDAO = LanguageDAO();
   final QuizDAO _quizDAO = QuizDAO();
   QuizCubit _quizCubit;
   final controller = TextEditingController();
   String userLetter;
+  FToast fToast;
 
   Category model;
   String difficultyGame;
@@ -80,6 +82,7 @@ class _QuestionPageState extends State<QuestionPage> {
   void didChangeDependencies() {
     // TODO: implement didChangeDependencies
     super.didChangeDependencies();
+    fToast.init(context);
     Locale myLocale = Localizations.localeOf(context);
     _quizCubit = BlocProvider.of<QuizCubit>(context);
     final Map arguments = ModalRoute.of(context).settings.arguments;
@@ -93,6 +96,7 @@ class _QuestionPageState extends State<QuestionPage> {
 
   @override
   void initState() {
+
     // TODO: Initialize _isInterstitialAdReady
     _isInterstitialAdReady = false;
 
@@ -103,33 +107,90 @@ class _QuestionPageState extends State<QuestionPage> {
     );
 
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
+    fToast = FToast();
 
     wrapperGetDifficulty();
     userLetter = "";
     alternativeMedium = false;
     _loadInterstitialAd();
+    assetsAudioPlayer.setVolume(0.1);
     assetsAudioPlayer.open(
       Audio("images/fw.mp3"),
+        respectSilentMode: true,
     );
+
     assetsAudioPlayer.playlistFinished.listen((finished) {
       if (finished) {
         if (assetsAudioPlayer.isPlaying.value) {
           assetsAudioPlayer.open(
             Audio("images/fw.mp3"),
+              respectSilentMode: true
           );
+          assetsAudioPlayer.setVolume(0.1);
+
         }
       }
     });
   }
 
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+
+    super.didChangeAppLifecycleState(state);
+
+    switch(state){
+      case AppLifecycleState.inactive:
+      break;
+      case AppLifecycleState.paused:
+        assetsAudioPlayer.stop();
+        break;
+      case AppLifecycleState.resumed:
+        assetsAudioPlayer.open(
+          Audio("images/fw.mp3"),
+            respectSilentMode: true,
+        );
+        assetsAudioPlayer.setVolume(0.1);
+        break;
+      case AppLifecycleState.detached:
+
+        break;
+    }
+  }
+
   void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
     super.dispose();
-    _interstitialAd?.dispose();
     assetsAudioPlayer.dispose();
+    _interstitialAd?.dispose();
+
+  }
+
+  Widget _showToast(String letter, BuildContext con) {
+    Widget toast = Container(
+      padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(25.0),
+        color: Colors.greenAccent,
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(Icons.check),
+          SizedBox(
+            width: 12.0,
+          ),
+          Text(AppLocalizations.of(con).toastGood() + " (" + letter + ") "),
+        ],
+      ),
+    );
+
+    return toast;
   }
 
   @override
   Widget build(BuildContext context) {
+
     return BlocBuilder<QuizCubit, QuizState>(builder: (context, state) {
       if (state is QuizLoadingState || state is QuizInitialState) {
         return Center(
@@ -257,6 +318,20 @@ class _QuestionPageState extends State<QuestionPage> {
             },
           );
         } else {
+
+          WidgetsBinding.instance.addPostFrameCallback((_){
+            if((failByFail == 0) && (controller.value.text != "")){
+
+              fToast.showToast(
+                child: _showToast(controller.value.text, context),
+                gravity: ToastGravity.CENTER,
+                toastDuration: Duration(seconds: 1),
+              );
+              controller.text = "";
+            }
+                          // Add Your Code here.
+          });
+
           return Scaffold(
             resizeToAvoidBottomInset: false,
             backgroundColor: t3_app_background,
@@ -416,7 +491,7 @@ class _QuestionPageState extends State<QuestionPage> {
                                 height: 18,
                               ),
                               Text(
-                                AppLocalizations.of(context).questionIntent(),
+                                AppLocalizations.of(context).questionIntent().replaceAll('3', (3 - totalFail).toString()),
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: textSizeLargeMedium,
@@ -453,3 +528,4 @@ class _QuestionPageState extends State<QuestionPage> {
     });
   }
 }
+

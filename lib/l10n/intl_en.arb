@@ -257,5 +257,11 @@
     "description": "successLoading for the Demo application",
     "type": "text",
     "placeholders": {}
+  },
+  "toastGood": "Nice job!. This letter is correct",
+  "@toastGood": {
+    "description": "toastGood for the Demo application",
+    "type": "text",
+    "placeholders": {}
   }
 }

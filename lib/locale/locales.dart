@@ -383,6 +383,14 @@ class AppLocalizations {
   }
 
  /* End Setting Page*/
+
+  String toastGood() {
+    return Intl.message(
+      'Nice job. This letter is correct',
+      name: 'toastGood',
+      desc: 'toastGood of the application',
+    );
+  }
 }
 
 class AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

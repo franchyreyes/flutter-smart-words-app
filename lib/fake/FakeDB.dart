@@ -97,7 +97,7 @@ class RandomQuizGenerator {
           QuizDetail(number: 11,question: "Something that people and animals eat, or plants absorb, to keep them alive.",completed: false,answer: "food"),
           QuizDetail(number: 12,question: "A piece of electronic equipment which makes it possible for you to speak to someone in another place who has similar equipment, using either electrical signals sent along a system of wires, or radio signals",completed: false,answer: "phone"),
           QuizDetail(number: 13,question: "A set of letters arranged in a fixed order, used for writing a language",completed: false,answer: "alphabet"),
-          QuizDetail(number: 14,question: "A piece of curved glass that makes objects look larger than they are",completed: false,answer: "magnifying glass"),
+          QuizDetail(number: 14,question: "A piece of curved glass that makes objects look larger than they are",completed: false,answer: "magnifyingglass"),
           QuizDetail(number: 15,question: "A number of people or animals who do something together as a group:",completed: false,answer: "team"),
           QuizDetail(number: 16,question: "One of a pair of coverings for your feet, usually made of a strong material such as leather",completed: false,answer: "shoe"),
           QuizDetail(number: 17,question: "Something used as a symbol of success",completed: false,answer: "trophy"),
