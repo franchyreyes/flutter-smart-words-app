@@ -391,6 +391,24 @@ class AppLocalizations {
       desc: 'toastGood of the application',
     );
   }
+
+  String questionDialogTitleHelp() {
+    return Intl.message(
+      'How to use the app',
+      name: 'questionDialogTitleHelp',
+      desc: 'questionDialogTitleHelp of the application',
+    );
+  }
+
+  String questionDialogDescriptioneHelp() {
+    return Intl.message(
+      "* You need to find the secret word, letter by letter. You have 3 attempts to achieve it. \n\n * You have a configuration screen with 3 options: \n   1- Change the difficulty of the game \n   2- Restart the game \n  3- Load new words from our data warehouse. \n",
+      name: 'questionDialogDescriptioneHelp',
+      desc: 'questionDialogDescriptioneHelp of the application',
+    );
+  }
+
+
 }
 
 class AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

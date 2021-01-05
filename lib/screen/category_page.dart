@@ -74,7 +74,7 @@ class _CategoryPageState extends State<CategoryPage> {
                       child: Container(
                         padding: EdgeInsets.only(top: 50),
                         child: Text(
-                          AppLocalizations.of(context).welcome() +
+                          " " +AppLocalizations.of(context).welcome() +
                               ' \n Find Words',
                           style: TextStyle(
                             color: t3_white,

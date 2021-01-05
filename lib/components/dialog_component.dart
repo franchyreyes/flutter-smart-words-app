@@ -71,7 +71,7 @@ dialogContent(BuildContext context, VoidCallback onPressed,VoidCallback onPresse
           SizedBox(height: 24),
           Padding(
             padding: EdgeInsets.only(left: 16, right: 16),
-            child: text(description, textColor:t3_colorPrimary, fontSize: textSizeMedium, maxLine: 2, isCentered: true),
+            child: text(description, textColor:t3_colorPrimary, fontSize: textSizeMedium, maxLine: 11, isCentered: true),
           ),
           SizedBox(height: 30),
           GestureDetector(

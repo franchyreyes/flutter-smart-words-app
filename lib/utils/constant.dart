@@ -8,6 +8,7 @@ const String kTableQuizName = "quiz";
 const String kDifficultyGame = "kDifficultyGame";
 const String kConfigurationLoading = "configurationLoading";
 const String kConfigurationLoadingFirebase = "configurationLoadingFirebase";
+const String kConfigurationDialogHelp = "configurationDialogHelp";
 
 
 /*fonts*/
@@ -38,7 +39,7 @@ enum Status { easy, medium, hard }
 
 void clearAllSharePreferences() async {
   SharedPreferences preferences = await SharedPreferences.getInstance();
-  var arrayOfKey = [kDifficultyGame,kConfigurationLoading,kConfigurationLoadingFirebase];
+  var arrayOfKey = [kDifficultyGame,kConfigurationLoading,kConfigurationLoadingFirebase,kConfigurationDialogHelp];
   for (var key in arrayOfKey) {
     if (preferences.containsKey(key)) {
       print(key);

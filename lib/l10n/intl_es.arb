@@ -246,7 +246,7 @@
     "type": "text",
     "placeholders": {}
   },
-  "noteReloadGame": "NOTA: Por defecto la aplicación tiene los datos. Sin embargo, esta acción actualiza las nuevas preguntas desde la nube(INTERNET), si encuentra nuevas.",
+  "noteReloadGame": "NOTA: Por defecto la aplicación tiene los datos. Sin embargo, esta acción actualiza las nuevas preguntas desde nuestro almacen de datos.",
   "@noteReloadGame": {
     "description": "noteReloadGame for the Demo application",
     "type": "text",
@@ -261,6 +261,18 @@
   "toastGood": "Buen trabajo!. Esta letra es correcta",
   "@toastGood": {
     "description": "toastGood for the Demo application",
+    "type": "text",
+    "placeholders": {}
+  },
+  "questionDialogTitleHelp": "Como utilizar el juego",
+  "@questionDialogTitleHelp": {
+    "description": "questionDialogTitleHelp for the Demo application",
+    "type": "text",
+    "placeholders": {}
+  },
+  "questionDialogDescriptioneHelp": "* Usted necesita encontrar la palabra secreta, letra por letra y tiene 3 intentos para lograrlo. \n\n * Vaya a la pantalla de configuracion si deseas usar una de estas opciones:\n\n   1- Cambiar la dificultad del juego \n   2- Reiniciar el juego                  \n  3- Cargar nuevas palabras de nuestro almacen de datos. \n",
+  "@questionDialogDescriptioneHelp": {
+    "description": "questionDialogDescriptioneHelp for the Demo application",
     "type": "text",
     "placeholders": {}
   }

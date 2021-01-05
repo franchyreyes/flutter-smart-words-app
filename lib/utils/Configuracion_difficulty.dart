@@ -38,3 +38,15 @@ class ConfigurationLoadingFirebase {
   }
 }
 
+class ConfigurationDialogHelp {
+  static Future<void> setDialogoHelpSF({bool value = true}) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setBool(kConfigurationDialogHelp, value);
+  }
+
+  static Future<bool> getDialogoHelpSF() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getBool(kConfigurationDialogHelp) ?? false;
+  }
+}
+

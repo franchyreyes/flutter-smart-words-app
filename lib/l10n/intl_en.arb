@@ -246,7 +246,7 @@
     "type": "text",
     "placeholders": {}
   },
-  "noteReloadGame": "NOTE: By default, the application has the data. However, this action updates the new questions from the cloud(INTERNET), if it finds new ones.",
+  "noteReloadGame": "NOTE: By default, the application has the data. However, this action updates the new questions from our database. if it finds new ones.",
   "@noteReloadGame": {
     "description": "noteReloadGame for the Demo application",
     "type": "text",
@@ -261,6 +261,18 @@
   "toastGood": "Nice job!. This letter is correct",
   "@toastGood": {
     "description": "toastGood for the Demo application",
+    "type": "text",
+    "placeholders": {}
+  },
+  "questionDialogTitleHelp": "How to use the game",
+  "@questionDialogTitleHelp": {
+    "description": "questionDialogTitleHelp for the Demo application",
+    "type": "text",
+    "placeholders": {}
+  },
+  "questionDialogDescriptioneHelp": "* You need to find the secret word, letter by letter. You have 3 attempts to achieve it. \n\n * Go to the settings screen if you want to use one of these options: \n\n   1- Change the difficulty of the game \n   2- Restart the game \n  3- Load new words from our data warehouse. \n",
+  "@questionDialogDescriptioneHelp": {
+    "description": "questionDialogDescriptioneHelp for the Demo application",
     "type": "text",
     "placeholders": {}
   }

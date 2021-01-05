@@ -28,7 +28,8 @@ class QuestionPage extends StatefulWidget {
   _QuestionPageState createState() => _QuestionPageState();
 }
 
-class _QuestionPageState extends State<QuestionPage> with WidgetsBindingObserver {
+class _QuestionPageState extends State<QuestionPage>
+    with WidgetsBindingObserver {
   final assetsAudioPlayer = AssetsAudioPlayer();
   final LanguageDAO _languageDAO = LanguageDAO();
   final QuizDAO _quizDAO = QuizDAO();
@@ -40,6 +41,7 @@ class _QuestionPageState extends State<QuestionPage> with WidgetsBindingObserver
   Category model;
   String difficultyGame;
   bool alternativeMedium;
+  bool helpDialog;
 
   // TODO: Add _interstitialAd
   InterstitialAd _interstitialAd;
@@ -78,6 +80,14 @@ class _QuestionPageState extends State<QuestionPage> with WidgetsBindingObserver
     });
   }
 
+  void wrapperGetDialogHelp() async {
+    await ConfigurationDialogHelp.getDialogoHelpSF().then((value) {
+      setState(() {
+        helpDialog = value;
+      });
+    });
+  }
+
   @override
   void didChangeDependencies() {
     // TODO: implement didChangeDependencies
@@ -96,7 +106,6 @@ class _QuestionPageState extends State<QuestionPage> with WidgetsBindingObserver
 
   @override
   void initState() {
-
     // TODO: Initialize _isInterstitialAdReady
     _isInterstitialAdReady = false;
 
@@ -111,24 +120,22 @@ class _QuestionPageState extends State<QuestionPage> with WidgetsBindingObserver
     fToast = FToast();
 
     wrapperGetDifficulty();
+    wrapperGetDialogHelp();
     userLetter = "";
     alternativeMedium = false;
     _loadInterstitialAd();
     assetsAudioPlayer.setVolume(0.1);
     assetsAudioPlayer.open(
       Audio("images/fw.mp3"),
-        respectSilentMode: true,
+      respectSilentMode: true,
     );
 
     assetsAudioPlayer.playlistFinished.listen((finished) {
       if (finished) {
         if (assetsAudioPlayer.isPlaying.value) {
-          assetsAudioPlayer.open(
-            Audio("images/fw.mp3"),
-              respectSilentMode: true
-          );
+          assetsAudioPlayer.open(Audio("images/fw.mp3"),
+              respectSilentMode: true);
           assetsAudioPlayer.setVolume(0.1);
-
         }
       }
     });
@@ -136,24 +143,22 @@ class _QuestionPageState extends State<QuestionPage> with WidgetsBindingObserver
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
-
     super.didChangeAppLifecycleState(state);
 
-    switch(state){
+    switch (state) {
       case AppLifecycleState.inactive:
-      break;
+        break;
       case AppLifecycleState.paused:
         assetsAudioPlayer.stop();
         break;
       case AppLifecycleState.resumed:
         assetsAudioPlayer.open(
           Audio("images/fw.mp3"),
-            respectSilentMode: true,
+          respectSilentMode: true,
         );
         assetsAudioPlayer.setVolume(0.1);
         break;
       case AppLifecycleState.detached:
-
         break;
     }
   }
@@ -163,7 +168,6 @@ class _QuestionPageState extends State<QuestionPage> with WidgetsBindingObserver
     super.dispose();
     assetsAudioPlayer.dispose();
     _interstitialAd?.dispose();
-
   }
 
   Widget _showToast(String letter, BuildContext con) {
@@ -190,7 +194,6 @@ class _QuestionPageState extends State<QuestionPage> with WidgetsBindingObserver
 
   @override
   Widget build(BuildContext context) {
-
     return BlocBuilder<QuizCubit, QuizState>(builder: (context, state) {
       if (state is QuizLoadingState || state is QuizInitialState) {
         return Center(
@@ -213,10 +216,8 @@ class _QuestionPageState extends State<QuestionPage> with WidgetsBindingObserver
           onPressed2: () {
             Navigator.pop(context);
           },
-
         );
       } else if (state is QuizLoadingOneQuestionState) {
-
         if (_isInterstitialAdReady) {
           _interstitialAd.show();
         }
@@ -317,11 +318,30 @@ class _QuestionPageState extends State<QuestionPage> with WidgetsBindingObserver
               });
             },
           );
+        } else if (!helpDialog) {
+          return DialogComponent(
+            title: AppLocalizations.of(context).questionDialogTitleHelp(),
+            description: AppLocalizations.of(context).questionDialogDescriptioneHelp(),
+            textButton: AppLocalizations.of(context).okReset(),
+            color: Colors.blue,
+            duration: false,
+            onPressed: () {
+              setState(() {
+                helpDialog = true;
+                 ConfigurationDialogHelp.setDialogoHelpSF();
+              });
+
+            },
+            onPressed2: () {
+              setState(() {
+                helpDialog = true;
+                ConfigurationDialogHelp.setDialogoHelpSF();
+              });
+            },
+          );
         } else {
-
-          WidgetsBinding.instance.addPostFrameCallback((_){
-            if((failByFail == 0) && (controller.value.text != "")){
-
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            if ((failByFail == 0) && (controller.value.text != "")) {
               fToast.showToast(
                 child: _showToast(controller.value.text, context),
                 gravity: ToastGravity.CENTER,
@@ -329,14 +349,14 @@ class _QuestionPageState extends State<QuestionPage> with WidgetsBindingObserver
               );
               controller.text = "";
             }
-                          // Add Your Code here.
+            // Add Your Code here.
           });
 
           return Scaffold(
             resizeToAvoidBottomInset: false,
             backgroundColor: t3_app_background,
             appBar: AppBar(
-              title: Text(AppLocalizations.of(context).categoryTitle() +
+              title:Text(AppLocalizations.of(context).categoryTitle() +
                   " " +
                   model.name),
               flexibleSpace: AppbarComponent(),
@@ -491,7 +511,10 @@ class _QuestionPageState extends State<QuestionPage> with WidgetsBindingObserver
                                 height: 18,
                               ),
                               Text(
-                                AppLocalizations.of(context).questionIntent().replaceAll('3', (3 - totalFail).toString()),
+                                AppLocalizations.of(context)
+                                    .questionIntent()
+                                    .replaceAll(
+                                        '3', (3 - totalFail).toString()),
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: textSizeLargeMedium,
@@ -528,4 +551,3 @@ class _QuestionPageState extends State<QuestionPage> with WidgetsBindingObserver
     });
   }
 }
-
