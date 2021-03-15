@@ -41,7 +41,7 @@ class _QuestionPageState extends State<QuestionPage>
   Category model;
   String difficultyGame;
   bool alternativeMedium;
-  bool helpDialog;
+  bool helpDialog = false;
 
   // TODO: Add _interstitialAd
   InterstitialAd _interstitialAd;
@@ -218,9 +218,6 @@ class _QuestionPageState extends State<QuestionPage>
           },
         );
       } else if (state is QuizLoadingOneQuestionState) {
-        if (_isInterstitialAdReady) {
-          _interstitialAd.show();
-        }
         QuizDetail firstQuestionDetail = state.quiz.quizDetailsList
             .firstWhere((element) => element.completed != true);
         String secretText =
@@ -457,6 +454,9 @@ class _QuestionPageState extends State<QuestionPage>
                                   controller: controller,
                                   onChange: (value) {
                                     {
+                                      if (_isInterstitialAdReady) {
+                                        _interstitialAd.show();
+                                      }
                                       if (controller.value.text.trim() != "") {
                                         userLetter =
                                             userLetter + controller.value.text;
