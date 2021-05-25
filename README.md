@@ -39,11 +39,11 @@ git clone https://github.com/franchyreyes/flutter-smart-words-app.git
 
 ## Screen
 
-![](images/Screenshot_20201215-111943.png)
-![](images/Screenshot_20201215-111954.png)
-![](images/Screenshot_20201215-112012.png)
-![](images/Screenshot_20201215-112036.png)
-![](images/Screenshot_20201215-112111.png)
+<img src="images/Screenshot_20201215-111943.png" width="270" height="480" />
+<img src="images/Screenshot_20201215-111954.png" width="270" height="480" />
+<img src="images/Screenshot_20201215-112012.png" width="270" height="480" />
+<img src="images/Screenshot_20201215-112036.png" width="270" height="480" />
+<img src="images/Screenshot_20201215-112111.png" width="270" height="480" />
 
 
 ## License
