@@ -1,16 +1,57 @@
-# findwords
+# Smart Words (Find Words) App
 
-A new Flutter application.
+[Smart Words App - see in Google Play](https://play.google.com/store/apps/details?id=com.fjr.findwords)
 
-## Getting Started
+This app will help you speed up your mind and learn new things.
 
-This project is a starting point for a Flutter application.
+This app allows you to find words and letters to win the battle.
+The application supports the Spanish and English language.
+You will have categories to choose from, such as fruits, human body, things, sports and animals.
 
-A few resources to get you started if this is your first Flutter project:
+In addition, in the settings option you can change the difficulty of the game (easy, medium and hard), reset the game and reload data from the cloud.
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+### Flutter libraries used in this project
+* flutter_localizations
+* sembast
+* flutter_bloc
+* bloc
+* shared_preferences
+* cloud_firestore
+* path_provider
+* intl
+* intl_translation
+* firebase_core
+* modal_progress_hud
+* firebase_admob
+* assets_audio_player
+* rflutter_alert
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### Prerequisites
+* Follow this step by step for installing Flutter: - [Installing Flutter](https://flutter.dev/docs/get-started/install)
+
+## Getting the code
+
+1- Clone repository
+
+```
+git clone https://github.com/franchyreyes/flutter-smart-words-app.git
+```
+
+## Screen
+
+![](images/Screenshot_20201215-111943.png)
+![](images/Screenshot_20201215-111954.png)
+![](images/Screenshot_20201215-112012.png)
+![](images/Screenshot_20201215-112036.png)
+![](images/Screenshot_20201215-112111.png)
+
+
+## License
+
+[Flutter license](https://github.com/flutter/flutter/blob/master/LICENSE)
+
+Note: This code has only been tested in the Android environment
+
+Any question feel free to contact me at franchyreyes@hotmail.com
+
+
